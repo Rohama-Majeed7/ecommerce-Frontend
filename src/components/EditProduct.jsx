@@ -6,13 +6,14 @@ import uploadImage from "../helpers/uploadImage";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { manageState } from "../store/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const EditProduct = ({ productData, onClose }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const [data, setData] = useState({
     ...productData,

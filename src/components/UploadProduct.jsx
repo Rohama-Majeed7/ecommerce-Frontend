@@ -5,7 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { manageState } from "../store/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import uploadImage from "../helpers/uploadImage";
 
 const UploadProduct = ({ onclose }) => {
@@ -13,6 +13,7 @@ const UploadProduct = ({ onclose }) => {
   const [showImage, setShowImage] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const dispatch = useDispatch();
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const [data, setData] = useState({
     productName: "",

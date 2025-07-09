@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const CategoryList = () => {
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const categoryLoading = new Array(12).fill(null);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
     const fetchCategory = async () => {

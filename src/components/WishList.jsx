@@ -14,12 +14,12 @@ const Wishlist = () => {
         const response = await axios.get(
           `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${user?._id}`,
           {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
         );
         setWishlist(response.data.items);
       } catch (err) {
@@ -34,15 +34,17 @@ const Wishlist = () => {
     try {
       await axios.delete(
         `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${userId}/${productId}`,
-       {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
       );
-      setWishlist((prev) => prev.filter((item) => item.productId !== productId));
+      setWishlist((prev) =>
+        prev.filter((item) => item.productId !== productId)
+      );
     } catch (err) {
       console.error("Error removing from wishlist:", err);
     }
@@ -77,10 +79,16 @@ const Wishlist = () => {
                 className="h-[200px] w-full object-contain p-4 bg-white"
               />
               <div className="p-4 flex flex-col gap-2 text-[#0A1F44]">
-                <h2 className="text-lg font-semibold capitalize">{item.name}</h2>
-                <p className="text-md text-[#0078D7] font-bold">${item.price}</p>
+                <h2 className="text-lg font-semibold capitalize">
+                  {item.name}
+                </h2>
+                <p className="text-md text-[#0078D7] font-bold">
+                  ${item.price}
+                </p>
                 <button
-                  onClick={() => handleRemoveFromWishlist(item.productId, user?._id)}
+                  onClick={() =>
+                    handleRemoveFromWishlist(item.productId, user?._id)
+                  }
                   className="mt-2 bg-[#0078D7] hover:bg-[#005BB5] text-white px-3 py-1 rounded-md transition"
                 >
                   Remove

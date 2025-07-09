@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AllOrder = () => {
   const [orders, setOrders] = useState([]);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const fetchOrderDetails = async () => {
     try {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Review = ({ productId, userId }) => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState("");
+  const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
     const fetchReviews = async () => {

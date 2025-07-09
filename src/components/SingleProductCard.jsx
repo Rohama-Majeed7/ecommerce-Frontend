@@ -17,6 +17,7 @@ const SingleProductCard = () => {
   const [activeImg, setActiveImg] = useState("");
   const [zoomImageCoordinate, setZoomImageCoordinate] = useState({ x: 0, y: 0 });
   const [zoomImage, setZoomImage] = useState(false);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

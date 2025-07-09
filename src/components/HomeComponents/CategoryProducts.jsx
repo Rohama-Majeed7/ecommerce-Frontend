@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import productCategory from "../../helpers/productCategory";
 import fetchCategoryWiseProducts from "../../helpers/fetchCategoryWiseProducts";
 import CategoryWiseProducts from "../CategoryWiseProducts";
+import { useSelector } from "react-redux";
 
 const CategoryProducts = () => {
   const params = useParams();
   const [data, setData] = useState([]);
   const [selectCategory, setSelectCategory] = useState({});
   const [sortBy, setSortBy] = useState("");
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const selectedCategoryList = Object.entries(selectCategory)
     .filter(([_, checked]) => checked)

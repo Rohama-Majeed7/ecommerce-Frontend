@@ -13,6 +13,7 @@ const SearchPage = () => {
 
   const dispatch = useDispatch();
   const value = useSelector((state) => state?.authenticator?.value);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const fetchData = async () => {
     try {

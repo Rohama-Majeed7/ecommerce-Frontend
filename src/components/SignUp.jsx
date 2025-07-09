@@ -5,11 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import uploadProfilePic from "../helpers/uploadProfilePic";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const [data, setData] = useState({
     username: "",
