@@ -89,7 +89,7 @@ const Header = () => {
             <input
               type="search"
               placeholder="Search products..."
-              className="px-4 py-2 text-text text-sm w-64 outline-none text-black"
+              className="px-4 py-2  text-sm w-64 outline-none text-black"
               onChange={(e) => handleSearch(e)}
             />
             <div className="bg-secondary px-3 py-2">

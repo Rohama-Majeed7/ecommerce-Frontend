@@ -41,13 +41,16 @@ const Login = () => {
         toast.success(response.data.msg);
         dispatch(setToken(response.data.token));
         dispatch(manageState());
+        navigate("/");
 
+      }
         if (response?.data?.user?.role === "admin") {
           navigate("/admin");
-        } else {
-          navigate("/");
         }
-      }
+        // } else {
+        //   navigate("/");
+        // }
+      
     } catch (error) {
       toast.error("Login failed. Please check your credentials!");
       console.error("Login Error:", error);
