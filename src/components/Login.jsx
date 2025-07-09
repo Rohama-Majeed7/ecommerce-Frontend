@@ -38,7 +38,7 @@ const Login = () => {
       );
       console.log("login response:", response);
 
-      if (response.statusText === 200) {
+      if (response.status === 200) {
         toast.success(response.data.msg);
         dispatch(setToken(response.data.token));
         dispatch(manageState());
