@@ -1,21 +1,32 @@
+
 import axios from "axios";
 import toast from "react-hot-toast";
-const addToCart = async (e, id) => {
+
+const addToCart = async (e, id,token) => {
+  
   e?.stopPropagation();
   e?.preventDefault();
-  const response = await axios.post(
-    "https://ecommerce-backend-theta-dun.vercel.app/cart/addtocart",
-    { productId: id },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
+
+  try {
+    const response = await axios.post(
+      "https://ecommerce-backend-theta-dun.vercel.app/cart/addtocart",
+      { productId: id },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // <-- include token
+        },
+        withCredentials: true, // Optional, if your backend uses cookies too
+      }
+    );
+
+    if (response.status === 200) {
+      toast.success(response.data.msg);
+      console.log(response.data);
     }
-  );
-  if (response.status === 200) {
-    toast.success(response.data.msg);
-    console.log(response.data);
+  } catch (error) {
+    console.error("Add to cart failed:", error);
+    toast.error("Failed to add to cart");
   }
 };
 

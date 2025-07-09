@@ -11,6 +11,7 @@ const VerticalProducts = ({ category, heading }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector((state) => state?.authenticator?.user?.user);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,7 +26,7 @@ const VerticalProducts = ({ category, heading }) => {
 
   const handleAddToCart = async (e, id) => {
     e.preventDefault(); // Prevent redirect when inside Link
-    await addToCart(e, id);
+    await addToCart(e, id,token);
     dispatch(manageState());
   };
 

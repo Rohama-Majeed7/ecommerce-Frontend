@@ -41,8 +41,7 @@ const Login = () => {
       if (response.status === 200) {
         toast.success(response.data.msg);
         dispatch(setToken(response.data.token));
-
-        dispatch(authUser(response.data.user))
+        dispatch(authUser(response.data.user));
         dispatch(manageState());
         navigate("/");
       } else {
