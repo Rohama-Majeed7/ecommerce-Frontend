@@ -36,23 +36,22 @@ const Login = () => {
           withCredentials: true,
         }
       );
-console.log("login response:",response);
+      console.log("login response:", response);
 
-      if (response.statusText === "OK") {
+      if (response.statusText === 200) {
         toast.success(response.data.msg);
         dispatch(setToken(response.data.token));
         dispatch(manageState());
         navigate("/");
-      }else{
-toast.error(response.data.msg)
+      } else {
+        toast.error(response.data.msg);
       }
-        if (response?.data?.user?.role === "admin") {
-          navigate("/admin");
-        }
-        // } else {
-        //   navigate("/");
-        // }
-      
+      if (response?.data?.user?.role === "admin") {
+        navigate("/admin");
+      }
+      // } else {
+      //   navigate("/");
+      // }
     } catch (error) {
       toast.error("Login failed. Please check your credentials!");
       console.error("Login Error:", error);
