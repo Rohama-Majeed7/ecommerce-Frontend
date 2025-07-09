@@ -21,6 +21,9 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showAdmin, setShowAdmin] = useState(false);
+console.log("user token:",token);
+console.log("login user:",user);
+
 
   useEffect(() => {
     const fetchData = async () => {
