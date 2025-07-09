@@ -36,6 +36,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
+console.log("login response:",response);
 
       if (response.status === 200) {
         toast.success(response.data.msg);
