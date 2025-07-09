@@ -17,7 +17,7 @@ const Header = () => {
   const token = useSelector((state) => state?.authenticator?.token);
   const count = useSelector((state) => state?.authenticator?.cartCount);
   const value = useSelector((state) => state?.authenticator?.value);
-  const user = useSelector((state) => state?.authenticator?.user?.user);
+  const user = useSelector((state) => state?.authenticator?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showAdmin, setShowAdmin] = useState(false);
