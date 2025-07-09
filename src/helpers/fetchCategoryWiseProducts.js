@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const fetchCategoryWiseProducts = async (category) => {
+const fetchCategoryWiseProducts = async (category,token) => {
+
   try {
     const response = await axios.post(
       "https://ecommerce-backend-theta-dun.vercel.app/product/get-category-wiseProduct",
