@@ -21,9 +21,8 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showAdmin, setShowAdmin] = useState(false);
-console.log("user token:",token);
-console.log("login user:",user);
-
+  console.log("user token:", token);
+  console.log("login user:", user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,12 +48,15 @@ console.log("login user:",user);
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/logout", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        "https://ecommerce-backend-theta-dun.vercel.app/user/logout",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
 
       if (response.status === 200) {
         toast.success(response.data.msg);
@@ -80,7 +82,6 @@ console.log("login user:",user);
   return (
     <nav className="w-full bg-primary text-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-
         {/* Logo */}
         <Link to="/">
           <img src={logo} alt="logo" className="w-20" />

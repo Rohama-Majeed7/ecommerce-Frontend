@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { manageState, setToken } from "../store/authSlice";
+import { authUser, manageState, setToken } from "../store/authSlice";
 
 const Login = () => {
   const user = useSelector((state) => state?.authenticator?.user?.user);
@@ -38,9 +38,10 @@ const Login = () => {
       );
 console.log("login response:",response);
 
-      if (response.status === 200) {
+      if (response.statusText === "OK") {
         toast.success(response.data.msg);
         dispatch(setToken(response.data.token));
+        // dispatch(authUser(response.data.user))
         dispatch(manageState());
         navigate("/");
 
