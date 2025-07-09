@@ -57,7 +57,7 @@ const Cart = () => {
 
   const deleteProduct = async (id) => {
     const response = await axios.delete(
-      `http://localhost:8080/cart/delete-cartproduct/${id}`,
+      `https://ecommerce-backend-theta-dun.vercel.app/cart/delete-cartproduct/${id}`,
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,

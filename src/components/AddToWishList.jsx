@@ -12,7 +12,7 @@ const AddToWishList = ({ product, userId }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/wishlistApi/wishlist",
+        "https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist",
         {
           userId,
           productId: product._id,

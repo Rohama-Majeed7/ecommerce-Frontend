@@ -39,7 +39,7 @@ const Review = ({ productId, userId }) => {
 
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/review/deletereview/${id}`);
+      await axios.delete(`https://ecommerce-backend-theta-dun.vercel.app/review/deletereview/${id}`);
       setReviews(reviews.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Error deleting review:", err);

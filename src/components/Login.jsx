@@ -29,7 +29,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8080/user/login",
+        "https://ecommerce-backend-theta-dun.vercel.app/user/login",
         data,
         {
           headers: { "Content-Type": "application/json" },

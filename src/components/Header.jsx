@@ -26,7 +26,7 @@ const Header = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/cart/cartitemcount",
+          "https://ecommerce-backend-theta-dun.vercel.app/cart/cartitemcount",
           {
             headers: {
               "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/user/logout", {
+      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/logout", {
         headers: {
           "Content-Type": "application/json",
         },

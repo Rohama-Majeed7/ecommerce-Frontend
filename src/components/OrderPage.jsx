@@ -7,7 +7,7 @@ const OrderPage = () => {
 
   const fetchOrderDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/user/order-list", {
+      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/order-list", {
         headers: {
           "Content-Type": "application/json",
         },

@@ -20,7 +20,7 @@ const CategoryProducts = () => {
     const fetchData = async () => {
       if (selectedCategoryList.length > 0) {
         const response = await axios.post(
-          "http://localhost:8080/product/filter-product",
+          "https://ecommerce-backend-theta-dun.vercel.app/product/filter-product",
           { category: selectedCategoryList },
           {
             headers: { "Content-Type": "application/json" },

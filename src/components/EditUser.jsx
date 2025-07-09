@@ -22,7 +22,7 @@ const EditUser = ({ name, email, role, userId, onClose }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/user/update-user",
+        "https://ecommerce-backend-theta-dun.vercel.app/user/update-user",
         { userId, role: userRole },
         {
           headers: { "Content-Type": "application/json" },
@@ -31,17 +31,7 @@ const EditUser = ({ name, email, role, userId, onClose }) => {
       );
 
       if (response.status === 200) {
-        toast.success(response.data.msg, {
-          duration: 3000,
-          position: "top-center",
-          style: {
-            background: "green",
-            color: "white",
-            padding: "10px",
-            fontWeight: "bold",
-            border: "2px solid red",
-          },
-        });
+        toast.success(response.data.msg)
         dispatch(manageState());
         onClose();
       }

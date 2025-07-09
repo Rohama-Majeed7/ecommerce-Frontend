@@ -3,7 +3,7 @@ import axios from "axios";
 const fetchCategoryWiseProducts = async (category) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/product/get-category-wiseProduct",
+      "https://ecommerce-backend-theta-dun.vercel.app/product/get-category-wiseProduct",
        {category} ,
       {
         headers: {

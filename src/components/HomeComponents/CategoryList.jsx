@@ -11,7 +11,7 @@ const CategoryList = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/product/get-category",
+          "https://ecommerce-backend-theta-dun.vercel.app/product/get-category",
           {
             headers: { "Content-Type": "application/json" },
             withCredentials: true,

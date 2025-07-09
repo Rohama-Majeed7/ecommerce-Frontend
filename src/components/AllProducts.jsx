@@ -38,25 +38,13 @@ const AllProducts = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/product/delete-product/${id}`,
+        `https://ecommerce-backend-theta-dun.vercel.app/product/delete-product/${id}`,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
 
-      toast.success(response.data?.msg || "Product deleted successfully!", {
-        duration: 4000,
-        position: "top-center",
-        icon: "🗑️",
-        style: {
-          background: "green",
-          color: "white",
-          fontSize: "bold",
-          padding: "10px",
-          border: "3px solid red",
-          width: "300px",
-        },
-      });
+      toast.success(response.data?.msg )
 
       dispatch(manageState());
     } catch (err) {

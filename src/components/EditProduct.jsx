@@ -38,7 +38,7 @@ const EditProduct = ({ productData, onClose }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8080/product/update-product",
+        "https://ecommerce-backend-theta-dun.vercel.app/product/update-product",
         { ...data, _id: productData._id },
         {
           headers: { "Content-Type": "application/json" },

@@ -33,7 +33,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/user/signup",
+        "https://ecommerce-backend-theta-dun.vercel.app/user/signup",
         data,
         {
           headers: { "Content-Type": "application/json" },

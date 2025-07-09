@@ -7,7 +7,7 @@ const AllOrder = () => {
 
   const fetchOrderDetails = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/user/all-order", {
+      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/all-order", {
         headers: {
           "Content-Type": "application/json",
         },

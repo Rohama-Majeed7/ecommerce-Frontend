@@ -23,7 +23,7 @@ const SingleProductCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:8080/product/single-product/${productId}`, {
+      const res = await axios.get(`https://ecommerce-backend-theta-dun.vercel.app/product/single-product/${productId}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });

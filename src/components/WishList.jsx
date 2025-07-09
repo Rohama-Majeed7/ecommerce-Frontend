@@ -11,7 +11,7 @@ const Wishlist = () => {
     const fetchWishlist = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/wishlistApi/wishlist/${user?._id}`,
+          `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${user?._id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const Wishlist = () => {
   const handleRemoveFromWishlist = async (productId, userId) => {
     try {
       await axios.delete(
-        `http://localhost:8080/wishlistApi/wishlist/${userId}/${productId}`,
+        `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${userId}/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",

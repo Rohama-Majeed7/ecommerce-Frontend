@@ -32,24 +32,12 @@ const UploadProduct = ({ onclose }) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post(
-      "http://localhost:8080/product/upload-product",
+      "https://ecommerce-backend-theta-dun.vercel.app/product/upload-product",
       data,
       { headers: { "Content-Type": "application/json" } }
     );
     if (response.status === 200) {
-      toast.success(response.data.msg, {
-        duration: 4000,
-        position: "top-center",
-        icon: "👏",
-        style: {
-          background: "green",
-          color: "white",
-          fontWeight: "bold",
-          padding: "10px",
-          border: "3px solid red",
-          width: "300px",
-        },
-      });
+      toast.success(response.data.msg);
 
       setData({
         productName: "",

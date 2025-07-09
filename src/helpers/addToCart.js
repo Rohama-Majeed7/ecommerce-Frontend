@@ -4,7 +4,7 @@ const addToCart = async (e, id) => {
   e?.stopPropagation();
   e?.preventDefault();
   const response = await axios.post(
-    "http://localhost:8080/cart/addtocart",
+    "https://ecommerce-backend-theta-dun.vercel.app/cart/addtocart",
     { productId: id },
     {
       headers: {
