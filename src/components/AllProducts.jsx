@@ -13,6 +13,7 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const value = useSelector((state) => state?.authenticator?.value);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,8 +21,12 @@ const AllProducts = () => {
         const response = await axios.get(
           "http://localhost:8080/product/get-products",
           {
-            headers: { "Content-Type": "application/json" },
-          }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
         );
         if (response.status === 200) {
           setProducts(response.data.products);

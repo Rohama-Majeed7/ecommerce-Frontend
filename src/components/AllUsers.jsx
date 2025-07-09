@@ -13,17 +13,20 @@ const AllUsers = () => {
   const users = useSelector((state) => state?.authenticator?.users?.users);
   const [updateUser, setUpdateUser] = useState();
   const [openRole, setOpenRole] = useState(false);
+    const token = useSelector((state) => state?.authenticator?.token);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
           "https://ecommerce-backend-theta-dun.vercel.app/user/all-users",
           {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
         );
         if (response.status === 200) {
           dispatch(setUsers(response.data));

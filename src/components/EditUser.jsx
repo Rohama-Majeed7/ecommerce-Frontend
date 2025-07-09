@@ -3,12 +3,13 @@ import ROLE from "../common/role";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { manageState } from "../store/authSlice";
 
 const EditUser = ({ name, email, role, userId, onClose }) => {
   const dispatch = useDispatch();
   const [userRole, setUserRole] = useState(role || "");
+  const token = useSelector((state) => state?.authenticator?.token);
 
   const handleOnChange = (e) => {
     setUserRole(e.target.value);
@@ -25,9 +26,12 @@ const EditUser = ({ name, email, role, userId, onClose }) => {
         "https://ecommerce-backend-theta-dun.vercel.app/user/update-user",
         { userId, role: userRole },
         {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
       );
 
       if (response.status === 200) {

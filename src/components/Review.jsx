@@ -11,7 +11,13 @@ const Review = ({ productId, userId }) => {
       try {
         const res = await axios.get(
           `http://localhost:8080/review/getreview/${productId}`
-        );
+        ,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
         setReviews(res.data);
       } catch (err) {
         console.error("Error fetching reviews:", err);
@@ -28,6 +34,12 @@ const Review = ({ productId, userId }) => {
         productId,
         rating,
         comment,
+      },{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
       });
       setReviews([...reviews, res.data.review]);
       setRating(1);
@@ -39,7 +51,13 @@ const Review = ({ productId, userId }) => {
 
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`https://ecommerce-backend-theta-dun.vercel.app/review/deletereview/${id}`);
+      await axios.delete(`https://ecommerce-backend-theta-dun.vercel.app/review/deletereview/${id}`,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
       setReviews(reviews.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Error deleting review:", err);

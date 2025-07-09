@@ -34,7 +34,13 @@ const UploadProduct = ({ onclose }) => {
     const response = await axios.post(
       "https://ecommerce-backend-theta-dun.vercel.app/product/upload-product",
       data,
-      { headers: { "Content-Type": "application/json" } }
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
     );
     if (response.status === 200) {
       toast.success(response.data.msg);

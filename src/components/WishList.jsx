@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
   const user = useSelector((state) => state?.authenticator?.user?.user);
+  const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -13,11 +14,12 @@ const Wishlist = () => {
         const response = await axios.get(
           `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${user?._id}`,
           {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
         );
         setWishlist(response.data.items);
       } catch (err) {
@@ -32,12 +34,13 @@ const Wishlist = () => {
     try {
       await axios.delete(
         `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${userId}/${productId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
+       {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
       );
       setWishlist((prev) => prev.filter((item) => item.productId !== productId));
     } catch (err) {

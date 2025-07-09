@@ -32,9 +32,12 @@ const Login = () => {
         "https://ecommerce-backend-theta-dun.vercel.app/user/login",
         data,
         {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
       );
       console.log("login response:", response);
 

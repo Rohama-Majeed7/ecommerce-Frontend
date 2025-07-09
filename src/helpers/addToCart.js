@@ -1,9 +1,7 @@
-
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const addToCart = async (e, id,token) => {
-  
+const addToCart = async (e, id, token) => {
   e?.stopPropagation();
   e?.preventDefault();
 
@@ -14,9 +12,9 @@ const addToCart = async (e, id,token) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // <-- include token
+          Authorization: `Bearer ${token}`,
         },
-        withCredentials: true, // Optional, if your backend uses cookies too
+        withCredentials: true,
       }
     );
 

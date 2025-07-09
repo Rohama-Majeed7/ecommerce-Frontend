@@ -8,6 +8,7 @@ const fetchCategoryWiseProducts = async (category) => {
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         withCredentials: true,
       }

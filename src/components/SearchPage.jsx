@@ -20,6 +20,7 @@ const SearchPage = () => {
       const response = await axios.get(`https://ecommerce-backend-theta-dun.vercel.app/product/search${query}`, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         withCredentials: true,
       });

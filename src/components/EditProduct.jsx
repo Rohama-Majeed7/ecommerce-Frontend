@@ -40,9 +40,13 @@ const EditProduct = ({ productData, onClose }) => {
       const response = await axios.post(
         "https://ecommerce-backend-theta-dun.vercel.app/product/update-product",
         { ...data, _id: productData._id },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+       {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
       );
       if (response.status === 200) {
         toast.success(response.data.msg);

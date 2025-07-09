@@ -10,9 +10,11 @@ const AllOrder = () => {
       const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/all-order", {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         withCredentials: true,
-      });
+      }
+      );
       if (response.status === 200) {
         setOrders(response.data.data);
       }

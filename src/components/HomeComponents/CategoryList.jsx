@@ -13,9 +13,12 @@ const CategoryList = () => {
         const response = await axios.get(
           "https://ecommerce-backend-theta-dun.vercel.app/product/get-category",
           {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
         );
         if (response.status === 200) {
           setCategory(response.data.data);

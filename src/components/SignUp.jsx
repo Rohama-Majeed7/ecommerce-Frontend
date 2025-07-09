@@ -36,8 +36,12 @@ const SignUp = () => {
         "https://ecommerce-backend-theta-dun.vercel.app/user/signup",
         data,
         {
-          headers: { "Content-Type": "application/json" },
-        }
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
       );
       if (response.status === 200) {
         toast.success(response.data.msg);

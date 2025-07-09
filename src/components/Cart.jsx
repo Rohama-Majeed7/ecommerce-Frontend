@@ -11,13 +11,17 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const value = useSelector((state) => state?.authenticator?.value);
   const dispatch = useDispatch();
+  const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
         "http://localhost:8080/cart/cartproducts",
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           withCredentials: true,
         }
       );
@@ -34,7 +38,10 @@ const Cart = () => {
       "http://localhost:8080/cart/update-cartproduct",
       { _id: id, quantity: qty + 1 },
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true,
       }
     );
@@ -47,7 +54,10 @@ const Cart = () => {
         "http://localhost:8080/cart/update-cartproduct",
         { _id: id, quantity: qty - 1 },
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
           withCredentials: true,
         }
       );
@@ -59,14 +69,17 @@ const Cart = () => {
     const response = await axios.delete(
       `https://ecommerce-backend-theta-dun.vercel.app/cart/delete-cartproduct/${id}`,
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true,
       }
     );
     if (response.status === 200) {
-      toast.success(response.data.msg)
+      toast.success(response.data.msg);
+    }
   };
-  }
   const totalQty = data.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = data.reduce(
     (acc, item) => acc + item.productId?.sellingPrice * item.quantity,
@@ -74,7 +87,9 @@ const Cart = () => {
   );
 
   const handlePayment = async () => {
-    const stripe = await loadStripe("pk_test_51Q3uuPA1xDrAsNkikvbukeQKU6O6bKXcYg9vSSXWKcflAVKuNVpyMi8Y9Y69P0Z8EUKEEHnO832AM3d1fPdC47Gy00KitOyH0R");
+    const stripe = await loadStripe(
+      "pk_test_51Q3uuPA1xDrAsNkikvbukeQKU6O6bKXcYg9vSSXWKcflAVKuNVpyMi8Y9Y69P0Z8EUKEEHnO832AM3d1fPdC47Gy00KitOyH0R"
+    );
     const response = await axios.post(
       "http://localhost:8080/user/checkout",
       { cartItems: data },
