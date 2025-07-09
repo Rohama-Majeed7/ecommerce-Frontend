@@ -41,10 +41,10 @@ console.log("login response:",response);
       if (response.statusText === "OK") {
         toast.success(response.data.msg);
         dispatch(setToken(response.data.token));
-        // dispatch(authUser(response.data.user))
         dispatch(manageState());
         navigate("/");
-
+      }else{
+toast.error(response.data.msg)
       }
         if (response?.data?.user?.role === "admin") {
           navigate("/admin");
