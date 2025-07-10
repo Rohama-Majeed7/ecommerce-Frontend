@@ -17,7 +17,7 @@ const Sidebar = () => {
     }`;
 
   return (
-    <div className="  ">
+    <div className=" ">
       {/* Toggle Button */}
       <div className="p-4 flex items-center justify-between">
         <FaBars
