@@ -17,7 +17,7 @@ const VerticalSearchCard = ({ data }) => {
     <section className="w-11/12 mx-auto my-6">
       <Link
         to="/"
-        className="inline-block bg-red-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-red-600 transition"
+        className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600 transition"
       >
         Back to Home
       </Link>
@@ -32,7 +32,7 @@ const VerticalSearchCard = ({ data }) => {
             <Link
               to={`/single-product/${el?._id}`}
               key={el?._id}
-              className="bg-white border-2 border-red-300 rounded-lg p-4 flex flex-col items-center min-w-[250px] max-w-xs hover:shadow-lg transition"
+              className="bg-white border-2 border-blue-300 rounded-lg p-4 flex flex-col items-center min-w-[250px] max-w-xs hover:shadow-lg transition"
             >
               <div className="w-[150px] h-[150px] mb-3">
                 <img
@@ -46,7 +46,7 @@ const VerticalSearchCard = ({ data }) => {
               </p>
               <button
                 onClick={(e) => handleAddToCart(e, el?._id)}
-                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition"
+                className="bg-blue-400 text-white px-4 py-1 rounded hover:bg-blue-600 transition"
               >
                 Add to cart
               </button>
