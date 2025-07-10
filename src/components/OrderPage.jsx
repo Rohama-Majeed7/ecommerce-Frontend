@@ -6,10 +6,13 @@ import { useSelector } from "react-redux";
 const OrderPage = () => {
   const [data, setData] = useState([]);
   const token = useSelector((state) => state?.authenticator?.token);
+  const user = useSelector((state) => state?.authenticator?.user);
 
   const fetchOrderDetails = async () => {
     try {
-      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/order-list",
+      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/order-list",{
+      userId: user._id  
+      },
        {
         headers: {
           "Content-Type": "application/json",
