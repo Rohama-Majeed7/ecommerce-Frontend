@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
-  const user = useSelector((state) => state?.authenticator?.user?.user);
+  const user = useSelector((state) => state?.authenticator?.user);
   const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
