@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 const AdminPage = () => {
   return (
     <main className="flex min-h-screen bg-gray-100">
-      <aside className="w-64 bg-white shadow-md">
+      <aside className="w-[200px] bg-white shadow-md">
         <Sidebar />
       </aside>
       <section className="flex-1 p-4 overflow-y-auto">

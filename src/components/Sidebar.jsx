@@ -40,7 +40,7 @@ const Sidebar = () => {
           </div>
 
           {/* Navigation */}
-          <nav className="inline-flex gap-2 text-[#0A1F44] font-semibold">
+          <nav className="inline-flex flex-col gap-2 text-[#0A1F44] font-semibold">
             <Link to="users" className={linkClasses("users")}>
               Users
             </Link>
