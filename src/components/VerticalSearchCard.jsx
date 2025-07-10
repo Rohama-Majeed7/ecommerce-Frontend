@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { manageState } from "../store/authSlice";
 import addToCart from "../helpers/addToCart";
 
 const VerticalSearchCard = ({ data }) => {
   const dispatch = useDispatch();
-
+const token = useSelector((state) => state?.authenticator?.token)
   const handleAddToCart = async (e, id) => {
     e.preventDefault(); // Prevent navigation when button inside <Link> is clicked
-    await addToCart(e, id);
+    await addToCart(e, id,token);
     dispatch(manageState());
   };
 
