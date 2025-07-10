@@ -11,9 +11,7 @@ console.log("orderpage:",user);
 
   const fetchOrderDetails = async () => {
     try {
-      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/order-list",{
-      userId: user._id  
-      },
+      const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/user/order-list",
        {
         headers: {
           "Content-Type": "application/json",
