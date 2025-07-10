@@ -35,7 +35,7 @@ const AddToWishList = ({ product, userId }) => {
       if (response.status === 201 || response.status === 200) {
         toast.success("Added to wishlist!");
       } else {
-        toast.error("Something went wrong.");
+        toast.error(response.data.message);
       }
     } catch (err) {
       console.error("Wishlist Error:", err);
