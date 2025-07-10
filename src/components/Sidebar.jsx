@@ -47,9 +47,9 @@ const Sidebar = () => {
             <Link to="products" className={linkClasses("products")}>
               Products
             </Link>
-            <Link to="orders" className={linkClasses("orders")}>
+            {/* <Link to="orders" className={linkClasses("orders")}>
               Orders
-            </Link>
+            </Link> */}
           </nav>
         </div>
       )}
