@@ -17,7 +17,7 @@ const Sidebar = () => {
     }`;
 
   return (
-    <aside className="h-screen bg-white border-r-2 border-[#0078D7] shadow-md relative w-fit">
+    <aside className="h-screen bg-white border-r-2 border-[#0078D7] shadow-md  ">
       {/* Toggle Button */}
       <div className="p-4 flex items-center justify-between">
         <FaBars
