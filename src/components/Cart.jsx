@@ -16,7 +16,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "http://localhost:8080/cart/cartproducts",
+        "https://ecommerce-backend-theta-dun.vercel.app/cart/cartproducts",
         {
           headers: {
             "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Cart = () => {
 
   const increaseQty = async (id, qty) => {
     const response = await axios.post(
-      "http://localhost:8080/cart/update-cartproduct",
+      "https://ecommerce-backend-theta-dun.vercel.app/cart/update-cartproduct",
       { _id: id, quantity: qty + 1 },
       {
         headers: {
@@ -51,7 +51,7 @@ const Cart = () => {
   const decreaseQty = async (id, qty) => {
     if (qty >= 2) {
       const response = await axios.post(
-        "http://localhost:8080/cart/update-cartproduct",
+        "https://ecommerce-backend-theta-dun.vercel.app/cart/update-cartproduct",
         { _id: id, quantity: qty - 1 },
         {
           headers: {
@@ -91,7 +91,7 @@ const Cart = () => {
       "pk_test_51Q3uuPA1xDrAsNkikvbukeQKU6O6bKXcYg9vSSXWKcflAVKuNVpyMi8Y9Y69P0Z8EUKEEHnO832AM3d1fPdC47Gy00KitOyH0R"
     );
     const response = await axios.post(
-      "http://localhost:8080/user/checkout",
+      "https://ecommerce-backend-theta-dun.vercel.app/user/checkout",
       { cartItems: data },
       {
         headers: { "Content-Type": "application/json" },
