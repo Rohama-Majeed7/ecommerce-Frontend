@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import addToCart from "../helpers/addToCart";
 import { manageState } from "../store/authSlice";
 
 const CategoryWiseProducts = ({ data, heading }) => {
+    const token = useSelector((state) => state?.authenticator?.token);
+
   const dispatch = useDispatch();
   const handleAddToCart = async (e, id) => {
-    await addToCart(e, id);
+    await addToCart(e, id,token);
     dispatch(manageState());
   };
   return (

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Success = () => {
   return (
     <div className="min-h-[80vh] flex justify-center items-center">
-
       <div className="bg-slate-100 w-full max-w-md mx-auto flex flex-col justify-center items-center p-6 rounded-lg shadow-lg text-center">
         <img
           src={SUCCESSIMAGE}
@@ -23,13 +22,12 @@ const Success = () => {
         >
           See Your Orders
         </Link>
-         <Link
-                to="/"
-                className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600 transition"
-              >
-                Back to Home
-              </Link>
-        
+        <Link
+          to="/"
+          className="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg mb-4 hover:bg-blue-600 transition"
+        >
+          Back to Home
+        </Link>
       </div>
     </div>
   );

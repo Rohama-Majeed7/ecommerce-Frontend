@@ -6,10 +6,10 @@ import addToCart from "../helpers/addToCart";
 
 const VerticalSearchCard = ({ data }) => {
   const dispatch = useDispatch();
-const token = useSelector((state) => state?.authenticator?.token)
+  const token = useSelector((state) => state?.authenticator?.token);
   const handleAddToCart = async (e, id) => {
     e.preventDefault(); // Prevent navigation when button inside <Link> is clicked
-    await addToCart(e, id,token);
+    await addToCart(e, id, token);
     dispatch(manageState());
   };
 
@@ -22,9 +22,7 @@ const token = useSelector((state) => state?.authenticator?.token)
         Back to Home
       </Link>
 
-      <h1 className="font-bold text-xl mb-4">
-        Search results: {data?.length}
-      </h1>
+      <h1 className="font-bold text-xl mb-4">Search results: {data?.length}</h1>
 
       <main className="flex flex-wrap justify-center gap-4">
         {data.length > 0 ? (

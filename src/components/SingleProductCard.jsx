@@ -51,7 +51,7 @@ const SingleProductCard = () => {
   }, []);
 
   const handleAddToCart = async (e, id) => {
-    await addToCart(e, id);
+    await addToCart(e, id,token);
     dispatch(manageState());
   };
 
