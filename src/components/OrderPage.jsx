@@ -7,6 +7,7 @@ const OrderPage = () => {
   const [data, setData] = useState([]);
   const token = useSelector((state) => state?.authenticator?.token);
   const user = useSelector((state) => state?.authenticator?.user);
+console.log("orderpage:",user);
 
   const fetchOrderDetails = async () => {
     try {
