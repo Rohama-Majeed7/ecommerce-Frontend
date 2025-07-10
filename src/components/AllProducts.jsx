@@ -19,7 +19,7 @@ const AllProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/product/get-products",
+          "https://ecommerce-backend-theta-dun.vercel.app/product/get-products",
           {
         headers: {
           "Content-Type": "application/json",
