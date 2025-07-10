@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authUser, manageState, setToken } from "../store/authSlice";
 
 const Login = () => {
-  const user = useSelector((state) => state?.authenticator?.user?.user);
+  const user = useSelector((state) => state?.authenticator?.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state?.authenticator?.token);

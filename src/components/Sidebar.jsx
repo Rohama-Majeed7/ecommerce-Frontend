@@ -6,7 +6,7 @@ import { FaBars } from "react-icons/fa";
 const Sidebar = () => {
   const location = useLocation();
   const profilePic = useSelector((state) => state.authenticator.profilePic);
-  const user = useSelector((state) => state.authenticator?.user?.user);
+  const user = useSelector((state) => state.authenticator?.user);
   const [showSidebar, setShowSidebar] = useState(true);
 
   const linkClasses = (path) =>
