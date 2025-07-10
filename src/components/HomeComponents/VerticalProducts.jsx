@@ -10,7 +10,7 @@ const VerticalProducts = ({ category, heading }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state?.authenticator?.user?.user);
+  const user = useSelector((state) => state?.authenticator?.user);
   const token = useSelector((state) => state?.authenticator?.token);
 
   useEffect(() => {
