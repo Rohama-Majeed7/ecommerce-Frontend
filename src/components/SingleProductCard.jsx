@@ -11,7 +11,9 @@ import Review from "./Review";
 
 const SingleProductCard = () => {
   const { productId } = useParams();
-  const user = useSelector((state) => state?.authenticator?.user?.user);
+  const user = useSelector((state) => state?.authenticator?.user);
+  console.log("review user:",user);
+  
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeImg, setActiveImg] = useState("");
