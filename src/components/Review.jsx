@@ -12,7 +12,7 @@ const Review = ({ productId, userId }) => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/review/getreview/${productId}`
+          `https://ecommerce-backend-theta-dun.vercel.app/review/getreview/${productId}`
         ,{
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const Review = ({ productId, userId }) => {
 
   const addReview = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/review/addreview", {
+      const res = await axios.post("https://ecommerce-backend-theta-dun.vercel.app/review/addreview", {
         userId,
         productId,
         rating,
