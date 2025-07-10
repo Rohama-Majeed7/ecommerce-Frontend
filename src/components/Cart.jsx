@@ -94,7 +94,10 @@ const Cart = () => {
       "https://ecommerce-backend-theta-dun.vercel.app/user/checkout",
       { cartItems: data },
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true,
       }
     );
