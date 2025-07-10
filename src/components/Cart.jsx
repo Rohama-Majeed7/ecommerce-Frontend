@@ -79,6 +79,7 @@ const Cart = () => {
     if (response.status === 200) {
       toast.success(response.data.msg);
     }
+    dispatch(manageState());
   };
   const totalQty = data.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = data.reduce(
