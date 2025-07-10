@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { manageState } from "../store/authSlice";
 
 const Review = ({ productId, userId }) => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState("");
   const token = useSelector((state) => state?.authenticator?.token);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          `https://ecommerce-backend-theta-dun.vercel.app/review/getreview/${productId}`
-        ,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+          `https://ecommerce-backend-theta-dun.vercel.app/review/getreview/${productId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
         setReviews(res.data);
+        dispatch(manageState());
       } catch (err) {
         console.error("Error fetching reviews:", err);
       }
@@ -31,21 +35,26 @@ const Review = ({ productId, userId }) => {
 
   const addReview = async () => {
     try {
-      const res = await axios.post("https://ecommerce-backend-theta-dun.vercel.app/review/addreview", {
-        userId,
-        productId,
-        rating,
-        comment,
-      },{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      const res = await axios.post(
+        "https://ecommerce-backend-theta-dun.vercel.app/review/addreview",
+        {
+          userId,
+          productId,
+          rating,
+          comment,
         },
-        withCredentials: true,
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
       setReviews([...reviews, res.data.review]);
       setRating(1);
       setComment("");
+      dispatch(manageState());
     } catch (err) {
       console.error("Error adding review:", err);
     }
@@ -53,13 +62,16 @@ const Review = ({ productId, userId }) => {
 
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`https://ecommerce-backend-theta-dun.vercel.app/review/deletereview/${id}`,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://ecommerce-backend-theta-dun.vercel.app/review/deletereview/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
       setReviews(reviews.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Error deleting review:", err);
@@ -69,7 +81,9 @@ const Review = ({ productId, userId }) => {
   return (
     <section className="w-11/12 mx-auto mt-8 mb-12">
       <div className="bg-white rounded-lg shadow-md border border-[#0078D7] p-6">
-        <h2 className="text-2xl font-bold text-[#0A1F44] mb-6">Product Reviews</h2>
+        <h2 className="text-2xl font-bold text-[#0A1F44] mb-6">
+          Product Reviews
+        </h2>
 
         {/* Reviews List */}
         <ul className="flex flex-col gap-4 max-h-[400px] overflow-y-auto pr-2">
@@ -86,7 +100,9 @@ const Review = ({ productId, userId }) => {
                     className="w-12 h-12 rounded-full object-cover border-2 border-[#0A1F44]"
                   />
                   <div>
-                    <p className="font-semibold text-[#0A1F44]">{review?.userId?.username}</p>
+                    <p className="font-semibold text-[#0A1F44]">
+                      {review?.userId?.username}
+                    </p>
                     <p className="text-sm text-gray-500">
                       {new Date(review?.createdAt).toLocaleDateString()} •{" "}
                       {new Date(review?.createdAt).toLocaleTimeString()}
@@ -112,7 +128,9 @@ const Review = ({ productId, userId }) => {
 
         {/* Add Review */}
         <div className="mt-10">
-          <h3 className="text-xl font-semibold mb-3 text-[#0A1F44]">Add a Review</h3>
+          <h3 className="text-xl font-semibold mb-3 text-[#0A1F44]">
+            Add a Review
+          </h3>
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
             <select
               value={rating}

@@ -20,6 +20,7 @@ const SingleProductCard = () => {
   const [zoomImageCoordinate, setZoomImageCoordinate] = useState({ x: 0, y: 0 });
   const [zoomImage, setZoomImage] = useState(false);
   const token = useSelector((state) => state?.authenticator?.token);
+  const value = useSelector((state) => state?.authenticator?.value);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const SingleProductCard = () => {
       }
     };
     fetchData();
-  }, [productId]);
+  }, [value]);
 
   const handleZoomImage = useCallback((e) => {
     setZoomImage(true);
