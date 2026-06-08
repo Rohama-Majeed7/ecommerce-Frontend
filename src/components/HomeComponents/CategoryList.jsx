@@ -13,7 +13,7 @@ const CategoryList = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          "https://ecommerce-backend-theta-dun.vercel.app/product/get-category",
+          "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-category",
           {
         headers: {
           "Content-Type": "application/json",
