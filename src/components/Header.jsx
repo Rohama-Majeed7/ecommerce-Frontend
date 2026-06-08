@@ -27,7 +27,7 @@ const Header = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://ecommerce-backend-theta-dun.vercel.app/cart/cartitemcount",
+          "https://ecommerce-backend.rohama-majeed7.deno.net/cart/cartitemcount",
           {
             headers: {
               "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "https://ecommerce-backend-theta-dun.vercel.app/user/logout",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/user/logout",
         {
           headers: {
             "Content-Type": "application/json",

@@ -12,7 +12,7 @@ const Wishlist = () => {
     const fetchWishlist = async () => {
       try {
         const response = await axios.get(
-          `https://ecommerce-backend-theta-dun.vercel.app/wishlistApi/wishlist/${user?._id}`,
+          `https://ecommerce-backend.rohama-majeed7.deno.net/wishlistApi/wishlist/${user?._id}`,
           {
             headers: {
               "Content-Type": "application/json",

@@ -33,7 +33,7 @@ const UploadProduct = ({ onclose }) => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post(
-      "https://ecommerce-backend-theta-dun.vercel.app/product/upload-product",
+      "https://ecommerce-backend.rohama-majeed7.deno.net/product/upload-product",
       data,
       {
         headers: {

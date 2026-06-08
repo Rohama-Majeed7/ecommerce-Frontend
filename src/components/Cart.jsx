@@ -16,7 +16,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "https://ecommerce-backend-theta-dun.vercel.app/cart/cartproducts",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/cart/cartproducts",
         {
           headers: {
             "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Cart = () => {
 
   const increaseQty = async (id, qty) => {
     const response = await axios.post(
-      "https://ecommerce-backend-theta-dun.vercel.app/cart/update-cartproduct",
+      "https://ecommerce-backend.rohama-majeed7.deno.net/cart/update-cartproduct",
       { _id: id, quantity: qty + 1 },
       {
         headers: {
@@ -51,7 +51,7 @@ const Cart = () => {
   const decreaseQty = async (id, qty) => {
     if (qty >= 2) {
       const response = await axios.post(
-        "https://ecommerce-backend-theta-dun.vercel.app/cart/update-cartproduct",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/cart/update-cartproduct",
         { _id: id, quantity: qty - 1 },
         {
           headers: {
@@ -67,7 +67,7 @@ const Cart = () => {
 
   const deleteProduct = async (id) => {
     const response = await axios.delete(
-      `https://ecommerce-backend-theta-dun.vercel.app/cart/delete-cartproduct/${id}`,
+      `https://ecommerce-backend.rohama-majeed7.deno.net/cart/delete-cartproduct/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const Cart = () => {
       "pk_test_51Q3uuPA1xDrAsNkikvbukeQKU6O6bKXcYg9vSSXWKcflAVKuNVpyMi8Y9Y69P0Z8EUKEEHnO832AM3d1fPdC47Gy00KitOyH0R"
     );
     const response = await axios.post(
-      "https://ecommerce-backend-theta-dun.vercel.app/user/checkout",
+      "https://ecommerce-backend.rohama-majeed7.deno.net/user/checkout",
       { cartItems: data },
       {
         headers: {

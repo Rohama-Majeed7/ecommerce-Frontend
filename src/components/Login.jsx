@@ -30,7 +30,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://ecommerce-backend-theta-dun.vercel.app/user/login",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/user/login",
         data,
         {
         headers: {

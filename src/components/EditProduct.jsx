@@ -39,7 +39,7 @@ const EditProduct = ({ productData, onClose }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://ecommerce-backend-theta-dun.vercel.app/product/update-product",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/product/update-product",
         { ...data, _id: productData._id },
        {
         headers: {

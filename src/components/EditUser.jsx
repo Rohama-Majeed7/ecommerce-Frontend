@@ -23,7 +23,7 @@ const EditUser = ({ name, email, role, userId, onClose }) => {
 
     try {
       const response = await axios.post(
-        "https://ecommerce-backend-theta-dun.vercel.app/user/update-user",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/user/update-user",
         { userId, role: userRole },
         {
         headers: {

@@ -18,7 +18,7 @@ const SearchPage = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`https://ecommerce-backend-theta-dun.vercel.app/product/search${query}`, {
+      const response = await axios.get(`https://ecommerce-backend.rohama-majeed7.deno.net/product/search${query}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

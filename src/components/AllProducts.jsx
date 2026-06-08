@@ -19,7 +19,7 @@ const AllProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "https://ecommerce-backend-theta-dun.vercel.app/product/get-products",
+          "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-products",
           {
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const AllProducts = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `https://ecommerce-backend-theta-dun.vercel.app/product/delete-product/${id}`,
+        `https://ecommerce-backend.rohama-majeed7.deno.net/product/delete-product/${id}`,
         {
           headers: { "Content-Type": "application/json" },
         }

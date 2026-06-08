@@ -14,7 +14,7 @@ const Review = ({ productId, userId }) => {
     const fetchReviews = async () => {
       try {
         const res = await axios.get(
-          `https://ecommerce-backend-theta-dun.vercel.app/review/getreview/${productId}`,
+          `https://ecommerce-backend.rohama-majeed7.deno.net/review/getreview/${productId}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const Review = ({ productId, userId }) => {
   const addReview = async () => {
     try {
       const res = await axios.post(
-        "https://ecommerce-backend-theta-dun.vercel.app/review/addreview",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/review/addreview",
         {
           userId,
           productId,
@@ -63,7 +63,7 @@ const Review = ({ productId, userId }) => {
   const deleteReview = async (id) => {
     try {
       await axios.delete(
-        `https://ecommerce-backend-theta-dun.vercel.app/review/deletereview/${id}`,
+        `https://ecommerce-backend.rohama-majeed7.deno.net/review/deletereview/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

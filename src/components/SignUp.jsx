@@ -35,7 +35,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "https://ecommerce-backend-theta-dun.vercel.app/user/signup",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/user/signup",
         data,
         {
         headers: {

@@ -19,7 +19,7 @@ const AllUsers = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://ecommerce-backend-theta-dun.vercel.app/user/all-users",
+          "https://ecommerce-backend.rohama-majeed7.deno.net/user/all-users",
           {
         headers: {
           "Content-Type": "application/json",
