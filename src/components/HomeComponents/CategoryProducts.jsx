@@ -22,7 +22,7 @@ const CategoryProducts = () => {
     const fetchData = async () => {
       if (selectedCategoryList.length > 0) {
         const response = await axios.post(
-          "https://ecommerce-backend-theta-dun.vercel.app/product/filter-product",
+          "https://ecommerce-backend.rohama-majeed7.deno.net/product/filter-product",
           { category: selectedCategoryList },
          {
         headers: {
