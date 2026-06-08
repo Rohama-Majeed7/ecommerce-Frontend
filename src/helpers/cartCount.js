@@ -2,7 +2,7 @@ import axios from "axios";
 // import toast from "react-hot-toast";
 
 const cartCountItem = async () => {
-  const response = await axios.get("https://ecommerce-backend-theta-dun.vercel.app/cart/cartitemcount", {
+  const response = await axios.get("https://ecommerce-backend.rohama-majeed7.deno.net/cart/cartitemcount", {
     headers: {
       "Content-Type": "application/json",
     },

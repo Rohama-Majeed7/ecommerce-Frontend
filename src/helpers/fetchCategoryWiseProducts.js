@@ -4,7 +4,7 @@ const fetchCategoryWiseProducts = async (category,token) => {
 
   try {
     const response = await axios.post(
-      "https://ecommerce-backend-theta-dun.vercel.app/product/get-category-wiseProduct",
+      "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-category-wiseProduct",
        {category} ,
       {
         headers: {

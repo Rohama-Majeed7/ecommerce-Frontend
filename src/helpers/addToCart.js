@@ -7,7 +7,7 @@ const addToCart = async (e, id, token) => {
 
   try {
     const response = await axios.post(
-      "https://ecommerce-backend-theta-dun.vercel.app/cart/addtocart",
+      "https://ecommerce-backend.rohama-majeed7.deno.net/cart/addtocart",
       { productId: id },
       {
         headers: {
