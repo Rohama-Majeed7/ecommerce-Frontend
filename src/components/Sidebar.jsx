@@ -17,7 +17,7 @@ import {
   FaChartLine,
   FaCog
 } from "react-icons/fa";
-import { logout, authUser } from "../../store/authSlice";
+import { logout, authUser } from "../store/authSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
 
