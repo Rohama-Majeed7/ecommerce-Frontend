@@ -31,7 +31,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "https://ecommerce-backend-theta-dun.vercel.app/user/user-details",
+        "https://ecommerce-backend.rohama-majeed7.deno.net/user/user-details",
         {
           headers: {
             "Content-Type": "application/json",
