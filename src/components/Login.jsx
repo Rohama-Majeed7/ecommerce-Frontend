@@ -115,7 +115,7 @@ const Login = () => {
         
         // Redirect based on role
         if (response?.data?.user?.role === "admin") {
-          setTimeout(() => navigate("/admin"), 500);
+          setTimeout(() => navigate("/admin/users"), 500);
         } else {
           setTimeout(() => navigate("/"), 500);
         }
