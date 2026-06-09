@@ -95,7 +95,7 @@ const SingleProductCard = () => {
   }, []);
 
   const handleAddToCart = async () => {
-    if (!user) {
+    if (!token) {
       toast.error("Please login to add items to cart");
       navigate("/login");
       return;
@@ -117,7 +117,7 @@ const SingleProductCard = () => {
   };
 
   const handleBuy = () => {
-    if (!user) {
+    if (!token) {
       toast.error("Please login to proceed");
       navigate("/login");
       return;
@@ -133,11 +133,11 @@ const SingleProductCard = () => {
   };
 
   const increaseQuantity = () => {
-    if (quantity < (data?.stock || 10)) {
+    // if (quantity < (data?.stock || 10)) {
       setQuantity(prev => prev + 1);
-    } else {
-      toast.error("Maximum stock limit reached");
-    }
+    // } else {
+    //   toast.error("Maximum stock limit reached");
+    // }
   };
 
   const decreaseQuantity = () => {
@@ -422,7 +422,7 @@ const SingleProductCard = () => {
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   onClick={handleAddToCart}
-                  disabled={addingToCart || data?.stock === 0}
+                  // disabled={addingToCart || data?.stock === 0}
                   className="flex-1 bg-gradient-to-r from-primary to-primary/80 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {addingToCart ? (
