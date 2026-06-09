@@ -103,11 +103,11 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    {
-      name: "Dashboard",
-      path: "/admin",
-      icon: <FaTachometerAlt />,
-    },
+    // {
+    //   name: "Dashboard",
+    //   path: "/admin",
+    //   icon: <FaTachometerAlt />,
+    // },
     {
       name: "Users",
       path: "/admin/users",

@@ -105,11 +105,11 @@ const AllProducts = () => {
     }).format(price);
   };
 
-  const getStockStatus = (stock) => {
-    if (stock === 0) return { text: "Out of Stock", color: "bg-red-100 text-red-800", icon: "🔴" };
-    if (stock < 10) return { text: "Low Stock", color: "bg-yellow-100 text-yellow-800", icon: "🟡" };
-    return { text: "In Stock", color: "bg-green-100 text-green-800", icon: "🟢" };
-  };
+  // const getStockStatus = (stock) => {
+  //   if (stock === 0) return { text: "Out of Stock", color: "bg-red-100 text-red-800", icon: "🔴" };
+  //   if (stock < 10) return { text: "Low Stock", color: "bg-yellow-100 text-yellow-800", icon: "🟡" };
+  //   return { text: "In Stock", color: "bg-green-100 text-green-800", icon: "🟢" };
+  // };
 
   // Filter and sort products
   const filteredProducts = products
@@ -312,7 +312,7 @@ const AllProducts = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => {
-              const stockStatus = getStockStatus(product.stock);
+              // const stockStatus = getStockStatus(product.stock);
               return (
                 <div
                   key={product._id}
@@ -327,9 +327,9 @@ const AllProducts = () => {
                     />
                     
                     {/* Stock Badge */}
-                    <div className={`absolute top-2 right-2 px-2 py-1 rounded-lg text-xs font-semibold ${stockStatus.color}`}>
+                    {/* <div className={`absolute top-2 right-2 px-2 py-1 rounded-lg text-xs font-semibold ${stockStatus.color}`}>
                       {stockStatus.icon} {stockStatus.text}
-                    </div>
+                    </div> */}
                     
                     {/* Discount Badge */}
                     {product.discount > 0 && (
