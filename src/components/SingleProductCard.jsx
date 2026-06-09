@@ -108,6 +108,8 @@ const SingleProductCard = () => {
       dispatch(manageState());
       toast.success(`${quantity} item(s) added to cart!`);
     } catch (error) {
+
+      console.log(error)
       toast.error("Failed to add to cart");
     } finally {
       setAddingToCart(false);
