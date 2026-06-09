@@ -36,7 +36,7 @@ const CategoryWiseProducts = ({ data, heading }) => {
     try {
       await addToCart(e, id, token);
       dispatch(manageState());
-      toast.success("Added to cart!");
+      // toast.success("Added to cart!");
     } catch (error) {
       toast.error("Failed to add to cart");
     } finally {

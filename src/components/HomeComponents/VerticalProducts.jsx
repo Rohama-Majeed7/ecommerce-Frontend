@@ -49,7 +49,7 @@ const VerticalProducts = ({ category, heading, limit = 8, showViewAll = true }) 
     try {
       await addToCart(e, id, token);
       dispatch(manageState());
-      toast.success("Product added to cart!");
+      // toast.success("Product added to cart!");
     } catch (error) {
       toast.error("Failed to add to cart");
     } finally {

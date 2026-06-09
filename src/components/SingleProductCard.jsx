@@ -107,7 +107,7 @@ const SingleProductCard = () => {
     await addToCart(data?._id, token);
 
     dispatch(manageState());
-    toast.success(`${quantity} item(s) added to cart!`);
+    // toast.success(`${quantity} item(s) added to cart!`);
   } catch (error) {
     console.log(error);
     toast.error("Failed to add to cart");
