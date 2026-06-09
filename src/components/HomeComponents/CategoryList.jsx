@@ -227,7 +227,7 @@ const CategoryList = () => {
         </div>
 
         {/* View All Categories Link */}
-        {!loading && category.length > 0 && (
+        {/* {!loading && category.length > 0 && (
           <div className="text-center mt-8">
             <Link
               to="/categories"
@@ -237,7 +237,7 @@ const CategoryList = () => {
               <FaChevronRight className="text-sm group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Add custom scrollbar styles */}

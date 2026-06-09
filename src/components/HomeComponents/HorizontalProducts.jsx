@@ -138,7 +138,7 @@ const HorizontalProducts = ({ category, heading, showViewAll = true }) => {
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mt-2 rounded-full"></div>
           </div>
           
-          {showViewAll && !loading && data.length > 0 && (
+          {/* {showViewAll && !loading && data.length > 0 && (
             <Link
               to={`/category/${encodeURIComponent(category)}`}
               className="text-primary hover:text-primary/80 font-semibold text-sm md:text-base transition-colors flex items-center gap-1 group"
@@ -146,7 +146,7 @@ const HorizontalProducts = ({ category, heading, showViewAll = true }) => {
               <span>View All</span>
               <FaChevronRight className="text-xs group-hover:translate-x-1 transition-transform" />
             </Link>
-          )}
+          )} */}
         </div>
 
         {/* Products Slider Container */}
