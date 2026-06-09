@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 const addToCart = async (e, id, token) => {
-  e?.stopPropagation();
+  // e?.stopPropagation();
   e?.preventDefault();
 
   try {
