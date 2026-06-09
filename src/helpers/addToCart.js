@@ -1,9 +1,9 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const addToCart = async (e, id, token) => {
+const addToCart = async (id, token) => {
   // e?.stopPropagation();
-  e?.preventDefault();
+  // e?.preventDefault();
 
   try {
     const response = await axios.post(
