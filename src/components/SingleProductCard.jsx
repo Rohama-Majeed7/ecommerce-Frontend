@@ -23,11 +23,11 @@ const SingleProductCard = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [error, setError] = useState(null);
-  
+
   const token = useSelector((state) => state?.authenticator?.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   // Use ref to prevent unnecessary re-fetches
   const isMounted = useRef(true);
   const fetchInProgress = useRef(false);
@@ -42,13 +42,13 @@ const SingleProductCard = () => {
   useEffect(() => {
     // Only fetch if we have productId and not already fetching
     if (!productId || fetchInProgress.current) return;
-    
+
     const fetchData = async () => {
       fetchInProgress.current = true;
       try {
         setLoading(true);
         setError(null);
-        
+
         const res = await axios.get(
           `https://ecommerce-backend.rohama-majeed7.deno.net/product/single-product/${productId}`,
           {
@@ -59,7 +59,7 @@ const SingleProductCard = () => {
             withCredentials: true,
           }
         );
-        
+
         if (res.status === 200 && isMounted.current) {
           setData(res.data.product);
           setActiveImg(res.data.product?.productImage?.[0]);
@@ -78,7 +78,7 @@ const SingleProductCard = () => {
         fetchInProgress.current = false;
       }
     };
-    
+
     fetchData();
   }, [productId, token]); // Remove 'value' from dependencies
 
@@ -88,9 +88,9 @@ const SingleProductCard = () => {
     const x = (e.clientX - left) / width;
     const y = (e.clientY - top) / height;
     // Clamp values between 0 and 1
-    setZoomImageCoordinate({ 
-      x: Math.min(Math.max(x, 0), 1), 
-      y: Math.min(Math.max(y, 0), 1) 
+    setZoomImageCoordinate({
+      x: Math.min(Math.max(x, 0), 1),
+      y: Math.min(Math.max(y, 0), 1)
     });
   }, []);
 
@@ -100,13 +100,11 @@ const SingleProductCard = () => {
       navigate("/login");
       return;
     }
-    
+
     setAddingToCart(true);
     try {
       // Add to cart based on quantity
-      for (let i = 0; i < quantity; i++) {
-        await addToCart({ preventDefault: () => {} }, data?._id, token);
-      }
+      await addToCart({ preventDefault: () => { } }, data?._id, token);
       dispatch(manageState());
       toast.success(`${quantity} item(s) added to cart!`);
     } catch (error) {
@@ -134,7 +132,7 @@ const SingleProductCard = () => {
 
   const increaseQuantity = () => {
     // if (quantity < (data?.stock || 10)) {
-      setQuantity(prev => prev + 1);
+    setQuantity(prev => prev + 1);
     // } else {
     //   toast.error("Maximum stock limit reached");
     // }
@@ -167,7 +165,7 @@ const SingleProductCard = () => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
     const stars = [];
-    
+
     for (let i = 0; i < fullStars; i++) {
       stars.push(<FaStar key={`full-${i}`} className="text-yellow-400" />);
     }
@@ -182,7 +180,7 @@ const SingleProductCard = () => {
   };
 
   const discount = data?.originalPrice > data?.sellingPrice;
-  const discountPercent = discount 
+  const discountPercent = discount
     ? Math.round(((data.originalPrice - data.sellingPrice) / data.originalPrice) * 100)
     : 0;
 
@@ -261,11 +259,10 @@ const SingleProductCard = () => {
                           setActiveImg(img);
                           setCurrentImageIndex(i);
                         }}
-                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${
-                          activeImg === img 
-                            ? 'ring-2 ring-primary shadow-md' 
+                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${activeImg === img
+                            ? 'ring-2 ring-primary shadow-md'
                             : 'hover:ring-2 hover:ring-primary/50'
-                        }`}
+                          }`}
                       >
                         <img
                           src={img}
@@ -288,7 +285,7 @@ const SingleProductCard = () => {
                       className="w-full h-[400px] md:h-[500px] object-contain rounded-lg bg-gray-50 cursor-zoom-in"
                       alt={data?.productName}
                     />
-                    
+
                     {/* Image Navigation Arrows */}
                     {data?.productImage?.length > 1 && (
                       <>
@@ -324,7 +321,7 @@ const SingleProductCard = () => {
                       />
                     </div>
                   )}
-                  
+
                   {/* Image Counter */}
                   {data?.productImage?.length > 1 && (
                     <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
@@ -392,7 +389,7 @@ const SingleProductCard = () => {
               </div>
 
               {/* Quantity Selector */}
-              <div className="flex items-center gap-4 flex-wrap">
+              {/* <div className="flex items-center gap-4 flex-wrap">
                 <span className="text-gray-700 font-semibold">Quantity:</span>
                 <div className="flex items-center gap-3">
                   <button
@@ -416,7 +413,7 @@ const SingleProductCard = () => {
                     {data?.stock} units available
                   </span>
                 </div>
-              </div>
+              </div> */}
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -461,7 +458,7 @@ const SingleProductCard = () => {
               </div>
 
               {/* Delivery Info */}
-              <div className="border-t pt-4 mt-2 space-y-2">
+              {/* <div className="border-t pt-4 mt-2 space-y-2">
                 <div className="flex items-center gap-3 text-sm">
                   <FaBolt className="text-primary" />
                   <span className="text-gray-600">
@@ -474,7 +471,7 @@ const SingleProductCard = () => {
                     30-day return policy
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
