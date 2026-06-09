@@ -95,26 +95,26 @@ const SingleProductCard = () => {
   }, []);
 
   const handleAddToCart = async () => {
-    if (!token) {
-      toast.error("Please login to add items to cart");
-      navigate("/login");
-      return;
-    }
+  if (!token) {
+    toast.error("Please login to add items to cart");
+    navigate("/login");
+    return;
+  }
 
-    setAddingToCart(true);
-    try {
-      // Add to cart based on quantity
-      await addToCart({ preventDefault: () => { } }, data?._id, token);
-      dispatch(manageState());
-      toast.success(`${quantity} item(s) added to cart!`);
-    } catch (error) {
+  setAddingToCart(true);
 
-      console.log(error)
-      toast.error("Failed to add to cart");
-    } finally {
-      setAddingToCart(false);
-    }
-  };
+  try {
+    await addToCart(data?._id, token);
+
+    dispatch(manageState());
+    toast.success(`${quantity} item(s) added to cart!`);
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to add to cart");
+  } finally {
+    setAddingToCart(false);
+  }
+};
 
   const handleBuy = () => {
     if (!token) {
