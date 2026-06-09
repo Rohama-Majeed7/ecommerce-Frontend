@@ -237,10 +237,10 @@ const SingleProductCard = () => {
               Home
             </button>
             <span>/</span>
-            <button onClick={() => navigate('/shop')} className="hover:text-primary transition-colors">
+            {/* <button onClick={() => navigate('/shop')} className="hover:text-primary transition-colors">
               Shop
             </button>
-            <span>/</span>
+            <span>/</span> */}
             <span className="text-gray-800 font-semibold truncate">{data?.productName}</span>
           </nav>
         </div>

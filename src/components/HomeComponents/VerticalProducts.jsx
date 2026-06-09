@@ -234,7 +234,7 @@ const VerticalProducts = ({ category, heading, limit = 8, showViewAll = true }) 
                     </div>
                     
                     {/* Stock Status */}
-                    <div className="flex items-center justify-between pt-2">
+                    {/* <div className="flex items-center justify-between pt-2">
                       {el?.stock > 0 ? (
                         <span className="text-xs text-green-600 font-medium flex items-center gap-1">
                           <span className="w-2 h-2 bg-green-600 rounded-full animate-pulse"></span>
@@ -248,12 +248,12 @@ const VerticalProducts = ({ category, heading, limit = 8, showViewAll = true }) 
                       )}
                       
                       {/* Free Shipping Badge */}
-                      {el?.freeShipping && (
+                      {/* {el?.freeShipping && (
                         <span className="text-xs text-blue-600 font-medium">
                           Free Shipping
                         </span>
-                      )}
-                    </div>
+                      )} */}
+                    {/* </div> */} 
                     
                     {/* Add to Cart Button (Mobile) */}
                     <button

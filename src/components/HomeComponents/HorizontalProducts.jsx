@@ -281,7 +281,7 @@ const HorizontalProducts = ({ category, heading, showViewAll = true }) => {
                           </div>
                           
                           {/* Stock Status */}
-                          {el?.stock > 0 ? (
+                          {/* {el?.stock > 0 ? (
                             <span className="text-xs text-green-600 font-medium">
                               In Stock
                             </span>
@@ -289,7 +289,7 @@ const HorizontalProducts = ({ category, heading, showViewAll = true }) => {
                             <span className="text-xs text-red-600 font-medium">
                               Out of Stock
                             </span>
-                          )}
+                          )} */}
                         </>
                       )}
                     </div>
