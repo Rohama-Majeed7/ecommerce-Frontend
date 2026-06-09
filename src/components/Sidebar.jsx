@@ -118,8 +118,8 @@ const Sidebar = () => {
       icon: <FaBoxes />,
       submenu: [
         { name: "All Products", path: "/admin/products" },
-        { name: "Add Product", path: "/admin/add-product" },
-        { name: "Categories", path: "/admin/categories" },
+        // { name: "Add Product", path: "/admin/add-product" },
+        // { name: "Categories", path: "/admin/categories" },
       ],
     },
     {
@@ -127,36 +127,36 @@ const Sidebar = () => {
       path: "/admin/orders",
       icon: <FaShoppingCart />,
     },
-    {
-      name: "Inventory",
-      icon: <FaStore />,
-      submenu: [
-        { name: "Stock Management", path: "/admin/inventory" },
-        { name: "Low Stock Alert", path: "/admin/low-stock" },
-      ],
-    },
-    {
-      name: "Discounts",
-      path: "/admin/discounts",
-      icon: <FaTag />,
-    },
-    {
-      name: "Analytics",
-      icon: <FaChartLine />,
-      submenu: [
-        { name: "Sales Report", path: "/admin/sales-report" },
-        { name: "User Analytics", path: "/admin/user-analytics" },
-      ],
-    },
-    {
-      name: "Settings",
-      icon: <FaCog />,
-      submenu: [
-        { name: "General", path: "/admin/settings" },
-        { name: "Payment", path: "/admin/payment-settings" },
-        { name: "Shipping", path: "/admin/shipping-settings" },
-      ],
-    },
+    // {
+    //   name: "Inventory",
+    //   icon: <FaStore />,
+    //   submenu: [
+    //     { name: "Stock Management", path: "/admin/inventory" },
+    //     { name: "Low Stock Alert", path: "/admin/low-stock" },
+    //   ],
+    // },
+    // {
+      // name: "Discounts",
+      // path: "/admin/discounts",
+      // icon: <FaTag />,
+    // },
+    // {
+    //   name: "Analytics",
+    //   icon: <FaChartLine />,
+    //   submenu: [
+    //     { name: "Sales Report", path: "/admin/sales-report" },
+    //     { name: "User Analytics", path: "/admin/user-analytics" },
+    //   ],
+    // },
+    // {
+    //   name: "Settings",
+    //   icon: <FaCog />,
+    //   submenu: [
+    //     { name: "General", path: "/admin/settings" },
+    //     { name: "Payment", path: "/admin/payment-settings" },
+    //     { name: "Shipping", path: "/admin/shipping-settings" },
+    //   ],
+    // },
   ];
 
   return (

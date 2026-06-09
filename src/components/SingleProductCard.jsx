@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FaStar, FaStarHalfAlt, FaRegStar, FaShoppingCart, FaBolt, FaShare, FaHeart, FaSpinner, FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -22,16 +22,33 @@ const SingleProductCard = () => {
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showShareMenu, setShowShareMenu] = useState(false);
+  const [error, setError] = useState(null);
   
   const token = useSelector((state) => state?.authenticator?.token);
-  const value = useSelector((state) => state?.authenticator?.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  // Use ref to prevent unnecessary re-fetches
+  const isMounted = useRef(true);
+  const fetchInProgress = useRef(false);
 
   useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    // Only fetch if we have productId and not already fetching
+    if (!productId || fetchInProgress.current) return;
+    
     const fetchData = async () => {
+      fetchInProgress.current = true;
       try {
         setLoading(true);
+        setError(null);
+        
         const res = await axios.get(
           `https://ecommerce-backend.rohama-majeed7.deno.net/product/single-product/${productId}`,
           {
@@ -42,26 +59,39 @@ const SingleProductCard = () => {
             withCredentials: true,
           }
         );
-        if (res.status === 200) {
+        
+        if (res.status === 200 && isMounted.current) {
           setData(res.data.product);
           setActiveImg(res.data.product?.productImage?.[0]);
+          setCurrentImageIndex(0);
         }
       } catch (error) {
         console.error("Error fetching product:", error);
-        toast.error("Failed to load product details");
+        if (isMounted.current) {
+          setError(error.response?.data?.msg || "Failed to load product details");
+          toast.error("Failed to load product details");
+        }
       } finally {
-        setLoading(false);
+        if (isMounted.current) {
+          setLoading(false);
+        }
+        fetchInProgress.current = false;
       }
     };
+    
     fetchData();
-  }, [productId, value, token]);
+  }, [productId, token]); // Remove 'value' from dependencies
 
   const handleZoomImage = useCallback((e) => {
     setZoomImage(true);
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = (e.clientX - left) / width;
     const y = (e.clientY - top) / height;
-    setZoomImageCoordinate({ x, y });
+    // Clamp values between 0 and 1
+    setZoomImageCoordinate({ 
+      x: Math.min(Math.max(x, 0), 1), 
+      y: Math.min(Math.max(y, 0), 1) 
+    });
   }, []);
 
   const handleAddToCart = async () => {
@@ -73,7 +103,7 @@ const SingleProductCard = () => {
     
     setAddingToCart(true);
     try {
-      // Add to cart multiple times based on quantity
+      // Add to cart based on quantity
       for (let i = 0; i < quantity; i++) {
         await addToCart({ preventDefault: () => {} }, data?._id, token);
       }
@@ -118,19 +148,17 @@ const SingleProductCard = () => {
 
   const nextImage = () => {
     if (data?.productImage?.length) {
-      setCurrentImageIndex(prev => 
-        prev + 1 >= data.productImage.length ? 0 : prev + 1
-      );
-      setActiveImg(data.productImage[currentImageIndex + 1] || data.productImage[0]);
+      const nextIndex = (currentImageIndex + 1) % data.productImage.length;
+      setCurrentImageIndex(nextIndex);
+      setActiveImg(data.productImage[nextIndex]);
     }
   };
 
   const prevImage = () => {
     if (data?.productImage?.length) {
-      setCurrentImageIndex(prev => 
-        prev - 1 < 0 ? data.productImage.length - 1 : prev - 1
-      );
-      setActiveImg(data.productImage[currentImageIndex - 1] || data.productImage[data.productImage.length - 1]);
+      const prevIndex = (currentImageIndex - 1 + data.productImage.length) % data.productImage.length;
+      setCurrentImageIndex(prevIndex);
+      setActiveImg(data.productImage[prevIndex]);
     }
   };
 
@@ -181,15 +209,15 @@ const SingleProductCard = () => {
     );
   }
 
-  if (!data) {
+  if (error || !data) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-10 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl p-12 text-center">
-            <p className="text-gray-500 text-lg">Product not found</p>
+            <p className="text-gray-500 text-lg">{error || "Product not found"}</p>
             <button
               onClick={() => navigate('/')}
-              className="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90"
+              className="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
             >
               Back to Home
             </button>
@@ -224,28 +252,31 @@ const SingleProductCard = () => {
             <div className="w-full lg:w-1/2">
               <div className="flex flex-col md:flex-row gap-4">
                 {/* Thumbnail Gallery */}
-                <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:max-h-[500px] order-2 md:order-1">
-                  {data?.productImage?.map((img, i) => (
-                    <div
-                      key={i}
-                      onClick={() => {
-                        setActiveImg(img);
-                        setCurrentImageIndex(i);
-                      }}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${
-                        activeImg === img 
-                          ? 'ring-2 ring-primary shadow-md' 
-                          : 'hover:ring-2 hover:ring-primary/50'
-                      }`}
-                    >
-                      <img
-                        src={img}
-                        alt={`thumbnail-${i}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
+                {data?.productImage?.length > 1 && (
+                  <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto md:max-h-[500px] order-2 md:order-1">
+                    {data?.productImage?.map((img, i) => (
+                      <div
+                        key={i}
+                        onClick={() => {
+                          setActiveImg(img);
+                          setCurrentImageIndex(i);
+                        }}
+                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${
+                          activeImg === img 
+                            ? 'ring-2 ring-primary shadow-md' 
+                            : 'hover:ring-2 hover:ring-primary/50'
+                        }`}
+                      >
+                        <img
+                          src={img}
+                          alt={`thumbnail-${i}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* Main Image with Zoom */}
                 <div className="relative flex-1 order-1 md:order-2">
@@ -264,12 +295,14 @@ const SingleProductCard = () => {
                         <button
                           onClick={prevImage}
                           className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                          aria-label="Previous image"
                         >
                           <FaChevronLeft className="text-gray-600" />
                         </button>
                         <button
                           onClick={nextImage}
                           className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                          aria-label="Next image"
                         >
                           <FaChevronRight className="text-gray-600" />
                         </button>
@@ -293,9 +326,11 @@ const SingleProductCard = () => {
                   )}
                   
                   {/* Image Counter */}
-                  <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
-                    {currentImageIndex + 1} / {data?.productImage?.length}
-                  </div>
+                  {data?.productImage?.length > 1 && (
+                    <div className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+                      {currentImageIndex + 1} / {data?.productImage?.length}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -307,10 +342,10 @@ const SingleProductCard = () => {
                 <span className="text-xs text-primary font-semibold uppercase tracking-wide bg-primary/10 px-3 py-1 rounded-full">
                   {data?.category}
                 </span>
-                {data?.inStock && (
+                {data?.stock > 0 && (
                   <span className="text-xs text-green-600 font-semibold bg-green-50 px-3 py-1 rounded-full flex items-center gap-1">
                     <MdVerified className="text-green-500" />
-                    In Stock
+                    In Stock ({data?.stock} units)
                   </span>
                 )}
               </div>
@@ -328,17 +363,19 @@ const SingleProductCard = () => {
               )}
 
               {/* Rating */}
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1">
-                  {renderStars(data?.averageRating || 4.5)}
+              {data?.averageRating > 0 && (
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
+                    {renderStars(data?.averageRating)}
+                  </div>
+                  <span className="text-sm text-gray-500">
+                    ({data?.reviewCount || 0} reviews)
+                  </span>
                 </div>
-                <span className="text-sm text-gray-500">
-                  ({data?.reviewCount || 0} reviews)
-                </span>
-              </div>
+              )}
 
               {/* Price */}
-              <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline gap-3 flex-wrap">
                 <span className="text-3xl md:text-4xl font-bold text-primary">
                   ${data?.sellingPrice?.toFixed(2)}
                 </span>
@@ -355,12 +392,13 @@ const SingleProductCard = () => {
               </div>
 
               {/* Quantity Selector */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
                 <span className="text-gray-700 font-semibold">Quantity:</span>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={decreaseQuantity}
-                    className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-lg font-semibold"
+                    disabled={quantity <= 1}
+                    className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     -
                   </button>
@@ -369,7 +407,8 @@ const SingleProductCard = () => {
                   </span>
                   <button
                     onClick={increaseQuantity}
-                    className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-lg font-semibold"
+                    disabled={quantity >= (data?.stock || 0)}
+                    className="w-8 h-8 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     +
                   </button>
@@ -383,19 +422,20 @@ const SingleProductCard = () => {
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   onClick={handleAddToCart}
-                  disabled={addingToCart}
-                  className="flex-1 bg-gradient-to-r from-primary to-primary/80 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
+                  disabled={addingToCart || data?.stock === 0}
+                  className="flex-1 bg-gradient-to-r from-primary to-primary/80 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {addingToCart ? (
                     <FaSpinner className="animate-spin" />
                   ) : (
                     <FaShoppingCart />
                   )}
-                  <span>Add to Cart</span>
+                  <span>{data?.stock === 0 ? "Out of Stock" : "Add to Cart"}</span>
                 </button>
                 <button
                   onClick={handleBuy}
-                  className="flex-1 border-2 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                  disabled={data?.stock === 0}
+                  className="flex-1 border-2 border-primary text-primary px-6 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <FaBolt />
                   <span>Buy Now</span>
@@ -440,20 +480,20 @@ const SingleProductCard = () => {
         </div>
 
         {/* Product Description Section */}
-        <div className="mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="border-b border-gray-200">
-            <div className="flex gap-6 px-6">
+        {data?.description && (
+          <div className="mt-8 bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="border-b border-gray-200 px-6">
               <button className="py-3 text-primary border-b-2 border-primary font-semibold">
                 Description
               </button>
             </div>
+            <div className="p-6">
+              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {data?.description}
+              </p>
+            </div>
           </div>
-          <div className="p-6">
-            <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-              {data?.description}
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* Review Component */}
         {!loading && (
