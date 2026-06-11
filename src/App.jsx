@@ -27,11 +27,12 @@ import WishList from "./components/WishList";
 const App = () => {
   const dispatch = useDispatch();
   const value = useSelector((state) => state?.authenticator?.value);
+  const user = useSelector((state) => state?.authenticator?.user);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/user-details",
+        `${import.meta.env.VITE_API_URL}/user/user-details`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +49,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Header />
+
+     {user?.role !== "admin" && <Header />}
       {/* <ChatButton /> */}
       <Routes>
         <Route path="/" element={<Home />} />

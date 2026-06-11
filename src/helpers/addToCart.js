@@ -7,7 +7,7 @@ const addToCart = async (id, token) => {
 
   try {
     const response = await axios.post(
-      "https://ecommerce-backend.rohama-majeed7.deno.net/cart/addtocart",
+      `${import.meta.env.VITE_API_URL}/cart/addtocart`,
       { productId: id },
       {
         headers: {

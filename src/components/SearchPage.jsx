@@ -38,7 +38,7 @@ const SearchPage = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/product/search?q=${encodeURIComponent(searchQuery)}`,
+        `${import.meta.env.VITE_API_URL}/product/search?q=${encodeURIComponent(searchQuery)}`,
         {
           headers: {
             "Content-Type": "application/json",

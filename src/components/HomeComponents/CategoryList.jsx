@@ -20,7 +20,7 @@ const CategoryList = () => {
       try {
         setError(null);
         const response = await axios.get(
-          "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-category",
+          `${import.meta.env.VITE_API_URL}/product/get-category`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const CategoryList = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-category",
+          `${process.env.VITE_API_URL}/product/get-category`,
           {
             headers: {
               "Content-Type": "application/json",

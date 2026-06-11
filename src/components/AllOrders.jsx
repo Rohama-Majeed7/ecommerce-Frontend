@@ -28,7 +28,7 @@ const AllOrder = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/all-order",
+        `${import.meta.env.VITE_API_URL}/user/all-order`,
         {
           headers: {
             "Content-Type": "application/json",

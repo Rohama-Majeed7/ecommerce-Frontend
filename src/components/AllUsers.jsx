@@ -30,7 +30,7 @@ const AllUsers = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/all-users",
+        `${import.meta.env.VITE_API_URL}/user/all-users`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const AllUsers = () => {
     setDeletingId(userId);
     try {
       const response = await axios.delete(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/user/delete-user/${userId}`,
+        `${import.meta.env.VITE_VITE_API_URL}/user/delete-user/${userId}`,
         {
           headers: {
             "Content-Type": "application/json",

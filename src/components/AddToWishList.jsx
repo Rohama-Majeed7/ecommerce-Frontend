@@ -17,7 +17,7 @@ const AddToWishList = ({ product, userId, onWishlistUpdate, className = "" }) =>
 
       try {
         const response = await axios.get(
-          `https://ecommerce-backend.rohama-majeed7.deno.net/wishlistApi/wishlist/${userId}`,
+          `${import.meta.env.VITE_API_URL}/wishlistApi/wishlist/${userId}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const AddToWishList = ({ product, userId, onWishlistUpdate, className = "" }) =>
     
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/wishlistApi/wishlist",
+        `${import.meta.env.VITE_API_URL}/wishlistApi/wishlist`,
         {
           userId,
           productId: product._id,
@@ -112,7 +112,7 @@ const AddToWishList = ({ product, userId, onWishlistUpdate, className = "" }) =>
     
     try {
       const response = await axios.delete(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/wishlistApi/wishlist/${userId}/${product._id}`,
+        `${import.meta.env.VITE_API_URL}/wishlistApi/wishlist/${userId}/${product._id}`,
         {
           headers: {
             "Content-Type": "application/json",

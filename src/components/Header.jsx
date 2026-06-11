@@ -22,13 +22,13 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const [showAdmin, setShowAdmin] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
+
   const adminDropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
 
@@ -64,10 +64,10 @@ const Header = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (!token || user?.role === "admin") return;
-      
+
       try {
         const response = await axios.get(
-          "https://ecommerce-backend.rohama-majeed7.deno.net/cart/cartitemcount",
+          `${import.meta.env.VITE_API_URL}/cart/cartitemcount`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/logout",
+        `${import.meta.env.VITE_API_URL}/user/logout`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -171,7 +171,7 @@ const Header = () => {
             {/* Admin Avatar & Dropdown */}
             {user?.role === "admin" ? (
               <div className="relative" ref={adminDropdownRef}>
-                <div 
+                <div
                   onClick={() => setShowAdmin(!showAdmin)}
                   className="flex items-center gap-2 cursor-pointer group"
                 >
@@ -182,7 +182,7 @@ const Header = () => {
                   />
                   <FaChevronDown className={`text-xs transition-transform duration-200 ${showAdmin ? 'rotate-180' : ''}`} />
                 </div>
-                
+
                 {showAdmin && (
                   <div className="absolute right-0 mt-2 w-52 bg-white text-gray-800 rounded-lg shadow-xl z-50 overflow-hidden">
                     <div className="px-4 py-3 bg-gray-50 border-b">
@@ -221,13 +221,13 @@ const Header = () => {
               </div>
             ) : (
               user?._id && (
-                <Link to="/profile" className="flex-shrink-0">
+                <button className="flex-shrink-0">
                   <img
                     src={user?.profilePic || avatar}
                     className="w-10 h-10 rounded-full border-2 border-secondary object-cover hover:border-white transition-colors"
                     alt="user avatar"
                   />
-                </Link>
+                </button>
               )
             )}
 
@@ -244,21 +244,27 @@ const Header = () => {
             )}
 
             {/* Auth Button */}
-            {token ? (
-              <button
-                onClick={handleLogout}
-                className="bg-white text-primary px-4 py-2 rounded-full font-semibold hover:bg-secondary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link
-                to="/login"
-                className="bg-white text-primary px-4 py-2 rounded-full font-semibold hover:bg-secondary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                Login
-              </Link>
+
+            {user?.role !== "admin" && (
+              token ? (
+                <button
+                  onClick={handleLogout}
+                  className="bg-white text-primary px-4 py-2 rounded-full font-semibold hover:bg-secondary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="bg-white text-primary px-4 py-2 rounded-full font-semibold hover:bg-secondary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                >
+                  Login
+                </Link>
+              )
             )}
+
+
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -271,7 +277,7 @@ const Header = () => {
                 <CiSearch className="text-2xl" />
               </button>
             )}
-            
+
             {user?._id && user?.role !== "admin" && (
               <Link to="/cart" className="relative">
                 <CiShoppingCart className="text-2xl" />
@@ -282,7 +288,7 @@ const Header = () => {
                 )}
               </Link>
             )}
-            
+
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
               className="p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -335,7 +341,7 @@ const Header = () => {
                   </div>
                 </div>
               )}
-              
+
               {/* Navigation Links */}
               {navItems.map((item) => (
                 <Link
@@ -347,7 +353,7 @@ const Header = () => {
                   <span>{item.name}</span>
                 </Link>
               ))}
-              
+
               {user?.role === "admin" && (
                 <>
                   <Link
@@ -366,7 +372,7 @@ const Header = () => {
                   </Link>
                 </>
               )}
-              
+
               {/* Wishlist for mobile */}
               {user?._id && user?.role !== "admin" && (
                 <Link
@@ -377,7 +383,7 @@ const Header = () => {
                   <span>Wishlist</span>
                 </Link>
               )}
-              
+
               {/* Auth Button Mobile */}
               {token ? (
                 <button

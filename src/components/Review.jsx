@@ -26,7 +26,7 @@ const Review = ({ productId, userId }) => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/review/getreview/${productId}`,
+        `${import.meta.env.VITE_API_URL}/review/getreview/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Review = ({ productId, userId }) => {
     setSubmitting(true);
     try {
       const res = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/review/addreview",
+        `${import.meta.env.VITE_API_URL}/review/addreview`,
         {
           userId,
           productId,
@@ -100,7 +100,7 @@ const Review = ({ productId, userId }) => {
     setDeletingId(id);
     try {
       await axios.delete(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/review/deletereview/${id}`,
+        `${import.meta.env.VITE_API_URL}/review/deletereview/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

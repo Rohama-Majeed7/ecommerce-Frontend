@@ -31,7 +31,7 @@ const OrderPage = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/order-list",
+        `${import.meta.env.VITE_API_URL}/user/order-list`,
         {
           headers: {
             "Content-Type": "application/json",

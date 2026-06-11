@@ -25,7 +25,7 @@ const Wishlist = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/wishlistApi/wishlist/${user?._id}`,
+        `${import.meta.env.VITE_API_URL}/wishlistApi/wishlist/${user?._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Wishlist = () => {
     setRemovingId(productId);
     try {
       await axios.delete(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/wishlistApi/wishlist/${user?._id}/${productId}`,
+        `${import.meta.env.VITE_API_URL}/wishlistApi/wishlist/${user?._id}/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",

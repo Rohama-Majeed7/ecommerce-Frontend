@@ -40,7 +40,7 @@ const ForgotPage = () => {
     try {
       // Replace with your actual API endpoint
       const response = await axios.post(
-        'https://ecommerce-backend.rohama-majeed7.deno.net/user/forgot-password',
+        `${import.meta.env.VITE_API_URL}/user/forgot-password`,
         { email },
         {
           headers: {
@@ -81,7 +81,7 @@ const ForgotPage = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        'https://ecommerce-backend.rohama-majeed7.deno.net/user/forgot-password',
+        `${import.meta.env.VITE_API_URL}/user/forgot-password`,
         { email },
         {
           headers: {

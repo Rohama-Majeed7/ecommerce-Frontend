@@ -37,7 +37,7 @@ const EditUser = ({ name, email, role, userId, onClose }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/update-user",
+        `${import.meta.env.VITE_API_URL}/user/update-user`,
         { userId, role: userRole },
         {
           headers: {

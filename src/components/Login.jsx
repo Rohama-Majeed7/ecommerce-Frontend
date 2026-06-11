@@ -85,7 +85,7 @@ const Login = () => {
     
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/login",
+        `${import.meta.env.VITE_API_URL}/user/login`,
         {
           email: data.email,
           password: data.password,
@@ -132,13 +132,13 @@ const Login = () => {
   };
 
   // Demo credentials for testing (remove in production)
-  const fillDemoCredentials = () => {
-    setData({
-      email: "demo@example.com",
-      password: "Demo123!",
-    });
-    toast.success("Demo credentials filled!");
-  };
+  // const fillDemoCredentials = () => {
+  //   setData({
+  //     email: "demo@example.com",
+  //     password: "Demo123!",
+  //   });
+  //   toast.success("Demo credentials filled!");
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
@@ -254,7 +254,7 @@ const Login = () => {
             </button>
 
             {/* Demo Credentials Button (Remove in production) */}
-            {process.env.NODE_ENV === "development" && (
+            {/* {process.env.NODE_ENV === "development" && (
               <button
                 type="button"
                 onClick={fillDemoCredentials}
@@ -262,7 +262,7 @@ const Login = () => {
               >
                 Fill Demo Credentials
               </button>
-            )}
+            )} */}
 
             {/* Social Login Section */}
             {/* <div className="relative">
@@ -274,7 +274,7 @@ const Login = () => {
               </div>
             </div> */}
 
-            <div className="grid grid-cols-2 gap-3">
+            {/* <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
@@ -289,7 +289,7 @@ const Login = () => {
                 <FaGithub className="text-gray-800" />
                 <span className="text-sm text-gray-700">GitHub</span>
               </button>
-            </div>
+            </div> */}
 
             {/* Sign Up Link */}
             <p className="text-sm text-center text-gray-600 pt-2">

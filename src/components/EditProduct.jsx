@@ -106,7 +106,7 @@ const EditProduct = ({ productData, onClose }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/product/update-product",
+        `${import.meta.env.VITE_API_URL}/product/update-product`,
         { ...data, _id: productData._id },
         {
           headers: {

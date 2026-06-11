@@ -50,7 +50,7 @@ const SingleProductCard = () => {
         setError(null);
 
         const res = await axios.get(
-          `https://ecommerce-backend.rohama-majeed7.deno.net/product/single-product/${productId}`,
+          `${import.meta.env.VITE_API_URL}/product/single-product/${productId}`,
           {
             headers: {
               "Content-Type": "application/json",

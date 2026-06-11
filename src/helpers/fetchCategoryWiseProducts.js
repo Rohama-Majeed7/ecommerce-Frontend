@@ -4,7 +4,7 @@ const fetchCategoryWiseProducts = async (category,token) => {
 
   try {
     const response = await axios.post(
-      "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-category-wiseProduct",
+      `${import.meta.env.VITE_API_URL}/product/get-category-wiseProduct`,
        {category} ,
       {
         headers: {

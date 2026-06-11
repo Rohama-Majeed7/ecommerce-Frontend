@@ -90,7 +90,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/signup",
+        `${import.meta.env.VITE_API_URL}/user/signup`,
         {
           username: data.username,
           email: data.email,

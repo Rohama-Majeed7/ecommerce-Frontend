@@ -28,7 +28,7 @@ const Cart = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/cart/cartproducts",
+        `${import.meta.env.VITE_API_URL}/cart/cartproducts`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const Cart = () => {
     setUpdatingQty(id);
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/cart/update-cartproduct",
+        `${import.meta.env.VITE_API_URL}/cart/update-cartproduct`,
         { _id: id, quantity: qty + 1 },
         {
           headers: {
@@ -79,7 +79,7 @@ const Cart = () => {
     setUpdatingQty(id);
     try {
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/cart/update-cartproduct",
+        `${import.meta.env.VITE_API_URL}/cart/update-cartproduct`,
         { _id: id, quantity: qty - 1 },
         {
           headers: {
@@ -106,7 +106,7 @@ const Cart = () => {
     setDeletingItem(id);
     try {
       const response = await axios.delete(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/cart/delete-cartproduct/${id}`,
+        `${import.meta.env.VITE_API_URL}/cart/delete-cartproduct/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const Cart = () => {
       );
       
       const response = await axios.post(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/user/checkout",
+        `${import.meta.env.VITE_API_URL}/user/checkout`,
         { cartItems: data },
         {
           headers: {

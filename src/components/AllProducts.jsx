@@ -47,7 +47,7 @@ const AllProducts = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://ecommerce-backend.rohama-majeed7.deno.net/product/get-products",
+        `${import.meta.env.VITE_API_URL}/product/get-products`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const AllProducts = () => {
     setDeletingId(id);
     try {
       const response = await axios.delete(
-        `https://ecommerce-backend.rohama-majeed7.deno.net/product/delete-product/${id}`,
+        `${import.meta.env.VITE_API_URL}/product/delete-product/${id}`,
         {
           headers: { 
             "Content-Type": "application/json",
