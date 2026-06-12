@@ -56,7 +56,7 @@ const AllUsers = () => {
     setDeletingId(userId);
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_VITE_API_URL}/user/delete-user/${userId}`,
+        `${import.meta.env.VITE_API_URL}/user/delete-user/${userId}`,
         {
           headers: {
             "Content-Type": "application/json",
