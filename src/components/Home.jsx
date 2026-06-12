@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CategoryList from "./HomeComponents/CategoryList";
 import Slider from "./Slider";
 import HorizontalProducts from "./HomeComponents/HorizontalProducts";
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const user = useSelector((state) => state?.authenticator?.user);
-
+const navigate = useNavigate()
   useEffect(() => {
       if (user && user.role === "admin") {
         // toast.error("Access denied. Admin only area.");
