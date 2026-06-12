@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Login from "./components/Login";
@@ -28,7 +28,7 @@ const App = () => {
   const dispatch = useDispatch();
   const value = useSelector((state) => state?.authenticator?.value);
   const user = useSelector((state) => state?.authenticator?.user);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
@@ -50,7 +50,7 @@ const App = () => {
   return (
     <BrowserRouter>
 
-     {user?.role !== "admin" && <Header />}
+      {user?.role !== "admin" && <Header />}
       {/* <ChatButton /> */}
       <Routes>
         <Route path="/" element={<Home />} />

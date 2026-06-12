@@ -11,6 +11,12 @@ const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const user = useSelector((state) => state?.authenticator?.user);
 
+  useEffect(() => {
+      if (user && user.role === "admin") {
+        // toast.error("Access denied. Admin only area.");
+        navigate("/admin/products");
+      }
+    }, [user, navigate]);
   // Scroll to top functionality
   useEffect(() => {
     const handleScroll = () => {
