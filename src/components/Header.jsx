@@ -233,14 +233,24 @@ const Header = () => {
 
             {/* Cart Icon */}
             {user?._id && user?.role !== "admin" && (
-              <Link to="/cart" className="relative hover:scale-110 transition-transform">
-                <CiShoppingCart className="text-2xl lg:text-3xl" />
-                {count > 0 && (
-                  <div className="absolute -top-2 -right-2 min-w-[20px] h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center px-1">
-                    {count > 99 ? '99+' : count}
-                  </div>
-                )}
-              </Link>
+              <>
+                <Link to="/cart" className="relative hover:scale-110 transition-transform">
+                  <CiShoppingCart className="text-2xl lg:text-3xl" />
+                  {count > 0 && (
+                    <div className="absolute -top-2 -right-2 min-w-[20px] h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center px-1">
+                      {count > 99 ? '99+' : count}
+                    </div>
+                  )}
+                </Link>
+
+                <Link
+                  to="/wishlist"
+                  className="flex items-center gap-3 px-2 py-2 hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <CiHeart className="text-xl" />
+                  {/* <span>Wishlist</span> */}
+                </Link>
+              </>
             )}
 
             {/* Auth Button */}
@@ -280,22 +290,22 @@ const Header = () => {
 
             {user?._id && user?.role !== "admin" && (
               <>
-              <Link to="/cart" className="relative">
-                <CiShoppingCart className="text-2xl" />
-                {count > 0 && (
-                  <div className="absolute -top-2 -right-2 min-w-[18px] h-4 rounded-full bg-red-500 text-white text-xs flex items-center justify-center px-1">
-                    {count > 99 ? '99+' : count}
-                  </div>
-                )}
-              </Link>
-              <Link
+                <Link to="/cart" className="relative">
+                  <CiShoppingCart className="text-2xl" />
+                  {count > 0 && (
+                    <div className="absolute -top-2 -right-2 min-w-[18px] h-4 rounded-full bg-red-500 text-white text-xs flex items-center justify-center px-1">
+                      {count > 99 ? '99+' : count}
+                    </div>
+                  )}
+                </Link>
+                <Link
                   to="/wishlist"
                   className="flex items-center gap-3 px-2 py-2 hover:bg-white/10 rounded-lg transition-colors"
                 >
                   <CiHeart className="text-xl" />
                   {/* <span>Wishlist</span> */}
                 </Link>
-</>
+              </>
             )}
 
             <button
@@ -383,7 +393,7 @@ const Header = () => {
               )}
 
               {/* Wishlist for mobile */}
-             
+
 
               {/* Auth Button Mobile */}
               {token ? (
