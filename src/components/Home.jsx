@@ -62,38 +62,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Promotional Banner */}
-        <section className="my-12 md:my-16">
-          <div className="container mx-auto px-4">
-            <div className="bg-gradient-to-r from-primary to-primary/90 rounded-2xl overflow-hidden shadow-xl">
-              <div className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12">
-                <div className="text-center md:text-left mb-6 md:mb-0">
-                  <span className="text-white/90 text-sm font-semibold uppercase tracking-wide">
-                    Limited Time Offer
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mt-2 mb-3">
-                    Summer Sale Extravaganza!
-                  </h3>
-                  <p className="text-white/80 text-sm md:text-base mb-4">
-                    Get up to 50% off on selected items. Hurry up!
-                  </p>
-                  <Link
-                    to="/shop"
-                    className="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 group"
-                  >
-                    <span>Shop Now</span>
-                    <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-                <div className="text-center">
-                  <div className="bg-white/20 rounded-full p-4">
-                    <FaShoppingBag className="text-5xl text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Vertical Products Section */}
         <section className="mb-12 md:mb-16">
@@ -156,36 +124,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Newsletter Section */}
-        <section className="my-12 md:my-16">
-          <div className="container mx-auto px-4">
-            <div className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl overflow-hidden shadow-xl p-8 md:p-12 text-center">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                Subscribe to Our Newsletter
-              </h3>
-              <p className="text-gray-300 text-sm md:text-base mb-6">
-                Get the latest updates on new products and upcoming sales
-              </p>
-              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
-              <p className="text-gray-400 text-xs mt-4">
-                No spam, unsubscribe at any time
-              </p>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Scroll to Top Button */}
         {showScrollTop && (

@@ -36,7 +36,6 @@ const CategoryWiseProducts = ({ data, heading }) => {
     try {
       await addToCart(e, id, token);
       dispatch(manageState());
-      // toast.success("Added to cart!");
     } catch (error) {
       toast.error("Failed to add to cart");
     } finally {
@@ -59,47 +58,47 @@ const CategoryWiseProducts = ({ data, heading }) => {
   };
 
   // Sort and filter products
-  const filteredProducts = data
-    .filter(product => {
-      const price = product?.sellingPrice || 0;
-      return price >= priceRange.min && price <= priceRange.max;
-    })
-    .sort((a, b) => {
-      let comparison = 0;
-      switch (sortBy) {
-        case "name":
-          comparison = a.productName?.localeCompare(b.productName);
-          break;
-        case "price":
-          comparison = (a.sellingPrice || 0) - (b.sellingPrice || 0);
-          break;
-        case "rating":
-          comparison = (getAverageRating(a.reviews) || 0) - (getAverageRating(b.reviews) || 0);
-          break;
-        default:
-          comparison = 0;
-      }
-      return sortOrder === "asc" ? comparison : -comparison;
-    });
-
-  const getRatingStars = (rating) => {
-    if (!rating) return null;
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
+  // const filteredProducts = data
+  //   ?.filter(product => {
+  //     const price = product?.sellingPrice || 0;
+  //     return price >= priceRange.min && price <= priceRange.max;
+  //   })
+  //   ?.sort((a, b) => {
+  //     let comparison = 0;
+  //     switch (sortBy) {
+  //       case "name":
+  //         comparison = a.productName?.localeCompare(b.productName);
+  //         break;
+  //       case "price":
+  //         comparison = (a.sellingPrice || 0) - (b.sellingPrice || 0);
+  //         break;
+  //       case "rating":
+  //         comparison = (getAverageRating(a.reviews) || 0) - (getAverageRating(b.reviews) || 0);
+  //         break;
+  //       default:
+  //         comparison = 0;
+  //     }
+  //     return sortOrder === "asc" ? comparison : -comparison;
+  //   }) || [];
+console.log("filtered product:",data)
+  // const getRatingStars = (rating) => {
+  //   if (!rating) return null;
+  //   const stars = [];
+  //   const fullStars = Math.floor(rating);
+  //   const hasHalfStar = rating % 1 >= 0.5;
     
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<FaStar key={`full-${i}`} className="text-yellow-400 text-sm" />);
-    }
-    if (hasHalfStar) {
-      stars.push(<FaStarHalf key="half" className="text-yellow-400 text-sm" />);
-    }
-    const remainingStars = 5 - stars.length;
-    for (let i = 0; i < remainingStars; i++) {
-      stars.push(<FaRegStar key={`empty-${i}`} className="text-gray-300 text-sm" />);
-    }
-    return stars;
-  };
+  //   for (let i = 0; i < fullStars; i++) {
+  //     stars.push(<FaStar key={`full-${i}`} className="text-yellow-400 text-sm" />);
+  //   }
+  //   if (hasHalfStar) {
+  //     stars.push(<FaStarHalf key="half" className="text-yellow-400 text-sm" />);
+  //   }
+  //   const remainingStars = 5 - stars.length;
+  //   for (let i = 0; i < remainingStars; i++) {
+  //     stars.push(<FaRegStar key={`empty-${i}`} className="text-gray-300 text-sm" />);
+  //   }
+  //   return stars;
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-6 md:py-8 px-4">
@@ -120,75 +119,18 @@ const CategoryWiseProducts = ({ data, heading }) => {
                 {heading || "Products"}
               </h1>
               <p className="text-gray-500 text-sm mt-1">
-                Found {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+                Found {data?.length} {data?.length === 1 ? 'product' : 'products'}
               </p>
             </div>
             
-            {/* Sort and Filter Controls */}
-            <div className="flex gap-2 w-full md:w-auto">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <FaFilter />
-                <span className="text-sm">Filter</span>
-              </button>
-              
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 outline-none"
-              >
-                <option value="default">Sort by: Default</option>
-                <option value="name">Sort by: Name</option>
-                <option value="price">Sort by: Price</option>
-                <option value="rating">Sort by: Rating</option>
-              </select>
-              
-              {sortBy !== "default" && (
-                <button
-                  onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  {sortOrder === "asc" ? <FaSortAmountUp /> : <FaSortAmountDown />}
-                </button>
-              )}
-            </div>
+            
           </div>
         </div>
 
-        {/* Filter Panel */}
-        {showFilters && (
-          <div className="bg-white rounded-xl shadow-md p-4 mb-6 animate-slideDown">
-            <h3 className="font-semibold text-gray-800 mb-3">Price Range</h3>
-            <div className="flex gap-4 items-center">
-              <input
-                type="number"
-                placeholder="Min"
-                value={priceRange.min}
-                onChange={(e) => setPriceRange(prev => ({ ...prev, min: Number(e.target.value) || 0 }))}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg"
-              />
-              <span>-</span>
-              <input
-                type="number"
-                placeholder="Max"
-                value={priceRange.max}
-                onChange={(e) => setPriceRange(prev => ({ ...prev, max: Number(e.target.value) || 1000 }))}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg"
-              />
-              <button
-                onClick={() => setPriceRange({ min: 0, max: 1000 })}
-                className="px-4 py-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-        )}
+       
 
         {/* Products Grid */}
-        {filteredProducts.length === 0 ? (
+        {data?.length === 0 ? (
           <div className="bg-white rounded-xl shadow-md p-12 text-center">
             <MdOutlineProductionQuantityLimits className="text-6xl text-gray-300 mx-auto mb-4" />
             <p className="text-gray-500 text-lg font-semibold">No Products Found</p>
@@ -204,8 +146,8 @@ const CategoryWiseProducts = ({ data, heading }) => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => {
-              const rating = getAverageRating(product?.reviews);
+            {data?.map((product) => {
+              // const rating = getAverageRating(product?.reviews);
               const discount = product?.originalPrice > product?.sellingPrice;
               const discountPercent = discount 
                 ? Math.round(((product.originalPrice - product.sellingPrice) / product.originalPrice) * 100)
@@ -267,7 +209,7 @@ const CategoryWiseProducts = ({ data, heading }) => {
                     </h3>
                     
                     {/* Rating */}
-                    {rating && (
+                    {/* {rating && (
                       <div className="flex items-center gap-2">
                         <div className="flex items-center gap-0.5">
                           {getRatingStars(rating)}
@@ -276,7 +218,7 @@ const CategoryWiseProducts = ({ data, heading }) => {
                           ({product?.reviews?.length || 0})
                         </span>
                       </div>
-                    )}
+                    )} */}
                     
                     {/* Price */}
                     <div className="flex items-baseline gap-2 pt-1">
@@ -291,7 +233,7 @@ const CategoryWiseProducts = ({ data, heading }) => {
                     </div>
                     
                     {/* Stock Status */}
-                    {product?.stock > 0 ? (
+                    {/* {product?.stock > 0 ? (
                       product?.stock < 10 ? (
                         <p className="text-xs text-orange-600 font-medium">
                           Only {product.stock} left in stock!
@@ -305,7 +247,7 @@ const CategoryWiseProducts = ({ data, heading }) => {
                       <p className="text-xs text-red-600 font-medium">
                         Out of Stock
                       </p>
-                    )}
+                    )} */}
                   </div>
                 </div>
               );
@@ -313,12 +255,11 @@ const CategoryWiseProducts = ({ data, heading }) => {
           </div>
         )}
 
-        {/* Load More (Optional - can be implemented with pagination) */}
-        {filteredProducts.length > 0 && filteredProducts.length < data.length && (
+        {/* Load More */}
+        {data?.length > 0 && data?.length < data?.length && (
           <div className="text-center mt-10">
             <button
               onClick={() => {
-                // Implement load more logic here
                 toast.success("Load more functionality can be added");
               }}
               className="px-8 py-3 bg-white text-primary border-2 border-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all duration-300"
@@ -329,8 +270,8 @@ const CategoryWiseProducts = ({ data, heading }) => {
         )}
       </div>
 
-      {/* Custom Styles */}
-      <style jsx>{`
+      {/* Inline styles for animations */}
+      <style>{`
         @keyframes slideDown {
           from {
             opacity: 0;
@@ -340,10 +281,6 @@ const CategoryWiseProducts = ({ data, heading }) => {
             opacity: 1;
             transform: translateY(0);
           }
-        }
-        
-        .animate-slideDown {
-          animation: slideDown 0.3s ease-out;
         }
         
         .line-clamp-2 {

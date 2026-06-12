@@ -24,13 +24,13 @@ const Slider = () => {
   const mobileImgs = [img1mobile, img2mobile, img3mobile, img4mobile, img5mobile];
   
   // Banner links for each slide
-  const bannerLinks = [
-    "/shop?category=electronics",
-    "/shop?category=fashion",
-    "/shop?category=home",
-    "/shop?category=sports",
-    "/shop?category=books"
-  ];
+  // const bannerLinks = [
+  //   "/shop?category=electronics",
+  //   "/shop?category=fashion",
+  //   "/shop?category=home",
+  //   "/shop?category=sports",
+  //   "/shop?category=books"
+  // ];
 
   // Check if mobile view
   useEffect(() => {
@@ -102,9 +102,9 @@ const Slider = () => {
     setTouchEnd(0);
   };
 
-  const handleBannerClick = () => {
-    navigate(bannerLinks[currentImg]);
-  };
+  // const handleBannerClick = () => {
+  //   navigate(bannerLinks[currentImg]);
+  // };
 
   return (
     <section 
@@ -127,7 +127,7 @@ const Slider = () => {
                 key={index}
                 className="w-full h-full flex-shrink-0 transition-transform duration-500 ease-in-out cursor-pointer"
                 style={{ transform: `translateX(-${currentImg * 100}%)` }}
-                onClick={handleBannerClick}
+                // onClick={handleBannerClick}
               >
                 <img 
                   src={imgUrl} 

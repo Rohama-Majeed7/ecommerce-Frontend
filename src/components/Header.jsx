@@ -128,10 +128,10 @@ const Header = () => {
   };
 
   // Navigation items
-  const navItems = user?._id && user?.role !== "admin" ? [
-    { name: "Shop", path: "/shop" },
-    { name: "Wishlist", path: "/wishlist", icon: <CiHeart className="text-xl" /> },
-  ] : [];
+  // const navItems = user?._id && user?.role !== "admin" ? [
+  //   { name: "Shop", path: "/shop" },
+  //   { name: "Wishlist", path: "/wishlist", icon: <CiHeart className="text-xl" /> },
+  // ] : [];
 
   return (
     <nav className={`w-full bg-gradient-to-r from-primary to-primary/90 text-white shadow-lg sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'py-2' : 'py-3'}`}>
@@ -279,6 +279,7 @@ const Header = () => {
             )}
 
             {user?._id && user?.role !== "admin" && (
+              <>
               <Link to="/cart" className="relative">
                 <CiShoppingCart className="text-2xl" />
                 {count > 0 && (
@@ -287,6 +288,14 @@ const Header = () => {
                   </div>
                 )}
               </Link>
+              <Link
+                  to="/wishlist"
+                  className="flex items-center gap-3 px-2 py-2 hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <CiHeart className="text-xl" />
+                  {/* <span>Wishlist</span> */}
+                </Link>
+</>
             )}
 
             <button
@@ -343,7 +352,7 @@ const Header = () => {
               )}
 
               {/* Navigation Links */}
-              {navItems.map((item) => (
+              {/* {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
@@ -352,7 +361,7 @@ const Header = () => {
                   {item.icon}
                   <span>{item.name}</span>
                 </Link>
-              ))}
+              ))} */}
 
               {user?.role === "admin" && (
                 <>
@@ -374,15 +383,7 @@ const Header = () => {
               )}
 
               {/* Wishlist for mobile */}
-              {user?._id && user?.role !== "admin" && (
-                <Link
-                  to="/wishlist"
-                  className="flex items-center gap-3 px-2 py-2 hover:bg-white/10 rounded-lg transition-colors"
-                >
-                  <CiHeart className="text-xl" />
-                  <span>Wishlist</span>
-                </Link>
-              )}
+             
 
               {/* Auth Button Mobile */}
               {token ? (

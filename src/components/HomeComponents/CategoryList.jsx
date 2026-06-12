@@ -81,7 +81,7 @@ const CategoryList = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          `${process.env.VITE_API_URL}/product/get-category`,
+          `${import.meta.env.VITE_API_URL}/product/get-category`,
           {
             headers: {
               "Content-Type": "application/json",
