@@ -14,7 +14,7 @@ const Cart = () => {
   const [processingPayment, setProcessingPayment] = useState(false);
   const [updatingQty, setUpdatingQty] = useState(null);
   const [deletingItem, setDeletingItem] = useState(null);
-  
+
   const value = useSelector((state) => state?.authenticator?.value);
   const dispatch = useDispatch();
   const token = useSelector((state) => state?.authenticator?.token);
@@ -49,7 +49,7 @@ const Cart = () => {
   };
 
   const increaseQty = async (id, qty) => {
-    setUpdatingQty(id);
+    setUpdatingQty(`${id}-plus`);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/cart/update-cartproduct`,
@@ -75,8 +75,9 @@ const Cart = () => {
 
   const decreaseQty = async (id, qty) => {
     if (qty <= 1) return;
-    
-    setUpdatingQty(id);
+
+    setUpdatingQty(`${id}-minus`);
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/cart/update-cartproduct`,
@@ -102,7 +103,7 @@ const Cart = () => {
 
   const deleteProduct = async (id) => {
     if (!window.confirm("Are you sure you want to remove this item from your cart?")) return;
-    
+
     setDeletingItem(id);
     try {
       const response = await axios.delete(
@@ -138,7 +139,7 @@ const Cart = () => {
       const stripe = await loadStripe(
         "pk_test_51Q3uuPA1xDrAsNkikvbukeQKU6O6bKXcYg9vSSXWKcflAVKuNVpyMi8Y9Y69P0Z8EUKEEHnO832AM3d1fPdC47Gy00KitOyH0R"
       );
-      
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/user/checkout`,
         { cartItems: data },
@@ -150,7 +151,7 @@ const Cart = () => {
           withCredentials: true,
         }
       );
-      
+
       if (response.status === 200 && response.data?.id) {
         await stripe.redirectToCheckout({ sessionId: response.data.id });
       } else {
@@ -235,7 +236,7 @@ const Cart = () => {
             <FaArrowLeft />
             <span>Continue Shopping</span>
           </button>
-          
+
           <div className="flex items-center gap-3">
             <div className="p-3 bg-primary/10 rounded-xl">
               <MdShoppingCart className="text-2xl text-primary" />
@@ -291,25 +292,34 @@ const Cart = () => {
                               </span>
                             )}
                           </div>
-                          
+
                           {/* Quantity Controls */}
                           <div className="flex items-center gap-3">
                             <button
                               onClick={() => decreaseQty(product._id, product.quantity)}
-                              disabled={updatingQty === product._id || product.quantity <= 1}
-                              className="w-8 h-8 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                              disabled={
+                                updatingQty === `${product._id}-minus` ||
+                                product.quantity <= 1
+                              }
                             >
-                              {updatingQty === product._id ? <FaSpinner className="animate-spin mx-auto" /> : <FaMinus size={12} />}
+                              {updatingQty === `${product._id}-minus` ? (
+                                <FaSpinner className="animate-spin mx-auto" />
+                              ) : (
+                                <FaMinus size={12} />
+                              )}
                             </button>
                             <span className="font-semibold text-gray-700 min-w-[30px] text-center">
                               {product.quantity}
                             </span>
                             <button
                               onClick={() => increaseQty(product._id, product.quantity)}
-                              disabled={updatingQty === product._id}
-                              className="w-8 h-8 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
+                              disabled={updatingQty === `${product._id}-plus`}
                             >
-                              {updatingQty === product._id ? <FaSpinner className="animate-spin mx-auto" /> : <FaPlus size={12} />}
+                              {updatingQty === `${product._id}-plus` ? (
+                                <FaSpinner className="animate-spin mx-auto" />
+                              ) : (
+                                <FaPlus size={12} />
+                              )}
                             </button>
                           </div>
                         </div>
@@ -349,7 +359,7 @@ const Cart = () => {
               <h2 className="text-xl font-bold text-gray-800 mb-4 pb-2 border-b">
                 Order Summary
               </h2>
-              
+
               <div className="space-y-3 mb-4">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal ({totalQty} items)</span>
@@ -367,7 +377,7 @@ const Cart = () => {
                   <span>Estimated Tax (10%)</span>
                   <span>${tax.toFixed(2)}</span>
                 </div>
-                
+
                 {shippingCost > 0 && totalPrice < 100 && (
                   <div className="bg-blue-50 rounded-lg p-3 text-sm">
                     <p className="text-blue-800">
