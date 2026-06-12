@@ -15,6 +15,8 @@ const AdminPage = () => {
     if (user && user.role !== "admin") {
       // toast.error("Access denied. Admin only area.");
       navigate("/login");
+    }else{
+      navigate("/admin/users")
     }
   }, [user, navigate]);
 
